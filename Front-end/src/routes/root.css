@@ -1,0 +1,130 @@
+.MenuBox {
+  width: 13.5rem;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+*{
+  box-sizing: border-box;
+}
+
+.navBar{
+  border-bottom: black solid 3px;
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 7%;
+  background: #002880;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: sticky;
+}
+.menu-bar{
+  margin-left: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items:center;
+}
+.menu-item{
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 25px;
+  font-weight:bolder;
+  text-align: center;
+  color: white;
+}
+.menu-item:hover{
+  background-color:gray;
+  text-decoration: underline;
+}
+.menu-item:active{
+  background-color: gray;
+}
+.menu-item p {
+background:#f0f0f0;
+color: black;
+}
+.user-bar{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.user-profile{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.user-manage{
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 25px;
+  font-weight:bolder;
+  text-align: center;
+  color: white;
+}
+.user-manage:hover{
+  background-color:gray;
+  text-decoration: underline;
+}
+.user-profile .user-noti{
+
+  margin-right: 5px;
+}
+.user-profile .user{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 7px;
+  padding-bottom: 7px;
+
+}
+.user .user-image{
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+.user .user-name{
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+.user .user-dropdown{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.user-no-login{
+  text-align: end;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  border-radius: 20%;
+  padding: 5px;
+}
+@media (max-width: 768px) {
+  .MenuBox {
+      width: 10rem; 
+      font-size: 0.9rem; 
+  }
+  }
+  
+  @media (max-width: 576px) {
+  .MenuBox {
+      width: 8rem; 
+      font-size: 0.8rem; 
+  }
+  }
+

@@ -1,0 +1,5 @@
+.Order {
+    border-radius: 10px;
+    border-right: 2px solid var(--pimary, #002880);
+    border-bottom: 2px solid var(--pimary, #002880);
+}

@@ -1,0 +1,28 @@
+.Shadows {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(44, 44, 44, 0.69) 63.54%, #000 100%);
+    width: 100%;
+    height: 100%;
+}
+
+/* .H-news{
+    height: calc(100vh - 3.5rem);
+}
+
+.news-slider {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .news-slider .inline-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  
+  .news-slider .inline-block.active {
+    opacity: 1;
+  } */
+  

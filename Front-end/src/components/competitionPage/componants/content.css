@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+}
+
+.container-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container-content .content-filter {
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-right: 5%;
+}
+
+.content-filter .filter-day {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.line {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.line-item1 {
+    margin-bottom: 30px;
+}
+
+.line-item2 {
+    margin-top: 30px;
+}
+
+.content-filter .filter-event {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.content-event {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: space-evenly;
+}
+
+.card-container {
+    margin: 20px;
+    border: #002880 solid;
+    width: 16rem;
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-container:hover {
+    box-shadow: 5px 10px #8888;
+
+}
+
+.card-head {
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #002880;
+    font-weight: bold;
+}
+
+.card-foot .date {
+    color: white;
+}
+
+.card-foot .sport-name {
+    color: white;
+    padding-top: 15px;
+    background-color: #002880;
+}
+
+.ButtonFilter {
+    margin: 0.25rem;
+    display: flex;
+    width: 6rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 0.375rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.ButtonFilter:hover {
+    background-color: #002880;
+    color: white;
+    
+}
+
+.useFilter {
+    background: linear-gradient(0deg, #B4C7F1 0%, #B4C7F1 100%), rgba(0, 0, 0, 0.00);
+}

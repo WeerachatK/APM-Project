@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+}
+.index-body{
+    display: flex;
+    flex-direction: row;
+
+}
+.filter-container{
+
+    width: 20%;
+}
+.content-container{
+
+    width: 80%;
+}
