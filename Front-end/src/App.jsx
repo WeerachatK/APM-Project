@@ -4,8 +4,8 @@ import IndexSchedulePage from './components/competitionPage/index';
 import IndexEventPage from './components/eventPage/index';
 import IndexLoginPage from './components/login/index';
 import IndexManageProfile from './components/manageProfilePage/index'
-import IndexUserDropDown from './components/userDropDown/index';
-import IndexUserCenter from './components/userCenter/index'
+// import IndexUserDropDown from './components/userDropDown/index';
+// import IndexUserCenter from './components/userCenter/index';
 import Root from './routes/root';
 import { Routes, Route } from "react-router-dom";
 import './App.css'

@@ -1,6 +1,5 @@
 import React from 'react'
-import Filter from './componants/filter';
-import Content from './componants/content';
+import Content from './components/content';
 import { useDispatch } from 'react-redux';
 import { setDisplay } from '../../redux/slices/displaySlice';
 import "./index.css"

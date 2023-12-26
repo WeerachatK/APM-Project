@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../competitionPage/componants/filter.css"
+import "../../competitionPage/components/filter.css"
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setEventDisplay } from '../../../redux/slices/eventDisplaySlice';

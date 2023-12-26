@@ -1,0 +1,101 @@
+score,ATHLETE_id,EVENTS_id
+"{"time": 13.7}",3,1
+"{"time": 13.12}",82,1
+"{"time": 13.16}",83,1
+"{"time": 15.09}",93,1
+"[{"mark": 1, "attempt": 1, "distance": 14.78}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 0, "attempt": 3, "distance": 12.78}, {"mark": 1, "attempt": 4, "distance": 13.3}, {"mark": 1, "attempt": 5, "distance": 13.73}, {"mark": 1, "attempt": 6, "distance": 14.48}]",5,2
+"[{"mark": 1, "attempt": 1, "distance": 33.34}, {"mark": 0, "attempt": 2, "distance": 33.91}, {"mark": 0, "attempt": 3, "distance": 34.96}, {"mark": 1, "attempt": 4, "distance": 32.28}, {"mark": 1, "attempt": 5, "distance": 36.51}, {"mark": 1, "attempt": 6, "distance": 33.71}]",10,3
+"[{"mark": 1, "attempt": 1, "distance": 28.01}, {"mark": 0, "attempt": 2, "distance": 29.2}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 1, "attempt": 4, "distance": 28.06}, {"mark": 1, "attempt": 5, "distance": 27.31}, {"mark": 1, "attempt": 6, "distance": 26.48}]",44,3
+"{"time": 11.95}",6,4
+"{"time": 12.13}",78,4
+"{"time": 12.54}",81,4
+"{"time": 11.86}",85,4
+"[{"mark": 1, "attempt": 1, "distance": 10.69}, {"mark": 1, "attempt": 2, "distance": 10.76}, {"mark": 1, "attempt": 3, "distance": 11.31}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",36,5
+"[{"mark": 1, "attempt": 1, "distance": 10.17}, {"mark": 1, "attempt": 2, "distance": 10.32}, {"mark": 1, "attempt": 3, "distance": 10.14}, {"mark": 1, "attempt": 4, "distance": 10.35}, {"mark": 1, "attempt": 5, "distance": 10.39}, {"mark": 1, "attempt": 6, "distance": 10.32}]",37,5
+"[{"mark": 1, "attempt": 1, "distance": 4.49}, {"mark": 1, "attempt": 2, "distance": 4.33}, {"mark": 1, "attempt": 3, "distance": 4.63}, {"mark": 1, "attempt": 4, "distance": 4.78}, {"mark": 1, "attempt": 5, "distance": 4.6}, {"mark": 1, "attempt": 6, "distance": 4.94}]",43,5
+"[{"mark": 1, "attempt": 1, "distance": 7.72}, {"mark": 1, "attempt": 2, "distance": 7.53}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 1, "attempt": 4, "distance": 7.25}, {"mark": 1, "attempt": 5, "distance": 7.0}, {"mark": 1, "attempt": 6, "distance": 7.19}]",52,5
+"{"time": 17.7}",91,6
+"[{"mark": 1, "attempt": 1, "distance": 21.11}, {"mark": 1, "attempt": 2, "distance": 22.86}, {"mark": 1, "attempt": 3, "distance": 20.1}, {"mark": 1, "attempt": 4, "distance": 22.03}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 1, "attempt": 6, "distance": 21.11}]",13,7
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",25,7
+"[{"mark": 1, "attempt": 1, "distance": 17.57}, {"mark": 1, "attempt": 2, "distance": 17.91}, {"mark": 1, "attempt": 3, "distance": 18.21}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 1, "attempt": 6, "distance": 17.5}]",53,7
+"{"time": 16.21}",15,8
+"{"time": 13.13}",29,8
+"{"time": 15.36}",102,8
+"{"time": 17.44}",103,8
+"[{"mark": 1, "attempt": 1, "distance": 5.32}, {"mark": 1, "attempt": 2, "distance": 5.16}, {"mark": 1, "attempt": 3, "distance": 5.4}, {"mark": 1, "attempt": 4, "distance": 5.24}, {"mark": 1, "attempt": 5, "distance": 5.44}, {"mark": 1, "attempt": 6, "distance": 5.15}]",18,9
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 1, "attempt": 2, "distance": 5.72}, {"mark": 1, "attempt": 3, "distance": 5.76}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 1, "attempt": 5, "distance": 5.82}, {"mark": 1, "attempt": 6, "distance": 6.06}]",31,9
+"[{"mark": 1, "attempt": 1, "distance": 4.84}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 1, "attempt": 4, "distance": 4.74}, {"mark": 1, "attempt": 5, "distance": 4.55}, {"mark": 1, "attempt": 6, "distance": 4.97}]",89,9
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 1, "attempt": 2, "distance": 5.4}, {"mark": 1, "attempt": 3, "distance": 5.1}, {"mark": 1, "attempt": 4, "distance": 5.21}, {"mark": 1, "attempt": 5, "distance": 4.0}, {"mark": 1, "attempt": 6, "distance": 4.39}]",101,9
+"[{"mark": 1, "attempt": 1, "distance": 4.26}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 1, "attempt": 3, "distance": 5.26}, {"mark": 1, "attempt": 4, "distance": 5.67}, {"mark": 1, "attempt": 5, "distance": 5.08}, {"mark": 1, "attempt": 6, "distance": 5.27}]",118,9
+"[{"mark": 1, "attempt": 1, "distance": 5.29}, {"mark": 1, "attempt": 2, "distance": 5.38}, {"mark": 1, "attempt": 3, "distance": 4.35}, {"mark": 1, "attempt": 4, "distance": 4.81}, {"mark": 1, "attempt": 5, "distance": 5.01}, {"mark": 1, "attempt": 6, "distance": 4.63}]",119,9
+"{"time": 12.68}",11,10
+"{"time": 13.39}",96,10
+"{"time": 13.82}",97,10
+"{"time": 11.9}",98,10
+"{"time": 11.71}",99,10
+"{"time": 12.18}",17,11
+"{"time": 13.65}",24,11
+"{"time": 11.98}",32,11
+"{"time": 12.61}",33,11
+"{"time": 14.66}",35,11
+"{"time": 0}",47,11
+"{"time": 14.52}",49,11
+"[{"mark": 1, "attempt": 1, "distance": 6.05}, {"mark": 1, "attempt": 2, "distance": 6.03}, {"mark": 1, "attempt": 3, "distance": 6.01}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 1, "attempt": 5, "distance": 5.85}, {"mark": 1, "attempt": 6, "distance": 5.85}]",28,12
+"[{"mark": 1, "attempt": 1, "distance": 6.41}, {"mark": 1, "attempt": 2, "distance": 6.64}, {"mark": 1, "attempt": 3, "distance": 6.44}, {"mark": 1, "attempt": 4, "distance": 6.43}, {"mark": 1, "attempt": 5, "distance": 6.42}, {"mark": 1, "attempt": 6, "distance": 6.52}]",41,12
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",42,12
+"{"time": 11.08}",5,13
+"{"time": 0}",20,13
+"{"time": 11.66}",31,13
+"{"time": 13.89}",34,13
+"{"time": 12.79}",40,13
+"[{"mark": 1, "attempt": 1, "distance": 26.63}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 1, "attempt": 3, "distance": 22.0}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 1, "attempt": 5, "distance": 24.36}, {"mark": 1, "attempt": 6, "distance": 26.91}]",38,14
+"[{"mark": 1, "attempt": 1, "distance": 21.72}, {"mark": 1, "attempt": 2, "distance": 19.85}, {"mark": 1, "attempt": 3, "distance": 20.86}, {"mark": 1, "attempt": 4, "distance": 19.71}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",39,14
+"[{"mark": 1, "attempt": 1, "distance": 20.5}, {"mark": 1, "attempt": 2, "distance": 23.15}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 1, "attempt": 4, "distance": 19.77}, {"mark": 1, "attempt": 5, "distance": 20.19}, {"mark": 1, "attempt": 6, "distance": 20.8}]",45,14
+"[{"mark": 1, "attempt": 1, "distance": 15.56}, {"mark": 1, "attempt": 2, "distance": 17.89}, {"mark": 1, "attempt": 3, "distance": 16.43}, {"mark": 1, "attempt": 4, "distance": 17.13}, {"mark": 1, "attempt": 5, "distance": 18.39}, {"mark": 0, "attempt": 6, "distance": 0}]",49,14
+"{"time": 14.54}",55,15
+"{"time": 14.54}",59,15
+"{"time": 15.94}",62,15
+"{"time": 13.85}",63,15
+"{"time": 17.13}",69,15
+"{"time": 16.69}",76,15
+"{"time": 53.34}",33,16
+"{"time": 59.06}",95,16
+"{"time": 57.5}",100,16
+"{"time": "02.29.07"}",2,17
+"{"time": "2.32.70"}",14,17
+"{"time": "2.43.24"}",26,17
+"[{"mark": 1, "attempt": 1, "distance": 7.22}, {"mark": 1, "attempt": 2, "distance": 7.14}, {"mark": 1, "attempt": 3, "distance": 7.47}, {"mark": 1, "attempt": 4, "distance": 8.07}, {"mark": 1, "attempt": 5, "distance": 7.54}, {"mark": 1, "attempt": 6, "distance": 7.81}]",13,18
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 0, "attempt": 3, "distance": 0}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",25,18
+"[{"mark": 1, "attempt": 1, "distance": 7.25}, {"mark": 1, "attempt": 2, "distance": 7.23}, {"mark": 1, "attempt": 3, "distance": 7.64}, {"mark": 1, "attempt": 4, "distance": 7.5}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 1, "attempt": 6, "distance": 8.19}]",53,18
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 1, "attempt": 2, "distance": 7.41}, {"mark": 1, "attempt": 3, "distance": 6.8}, {"mark": 1, "attempt": 4, "distance": 7.41}, {"mark": 1, "attempt": 5, "distance": 7.6}, {"mark": 1, "attempt": 6, "distance": 7.21}]",104,18
+"[{"mark": 1, "attempt": 1, "distance": 31.43}, {"mark": 1, "attempt": 2, "distance": 30.31}, {"mark": 1, "attempt": 3, "distance": 30.99}, {"mark": 1, "attempt": 4, "distance": 31.99}, {"mark": 1, "attempt": 5, "distance": 31.29}, {"mark": 1, "attempt": 6, "distance": 31.63}]",9,19
+"[{"mark": 1, "attempt": 1, "distance": 29.83}, {"mark": 1, "attempt": 2, "distance": 28.68}, {"mark": 1, "attempt": 3, "distance": 33.23}, {"mark": 1, "attempt": 4, "distance": 30.75}, {"mark": 1, "attempt": 5, "distance": 32.05}, {"mark": 1, "attempt": 6, "distance": 33.23}]",37,19
+"[{"mark": 1, "attempt": 1, "distance": 15.06}, {"mark": 1, "attempt": 2, "distance": 14.16}, {"mark": 1, "attempt": 3, "distance": 13.53}, {"mark": 1, "attempt": 4, "distance": 13.83}, {"mark": 1, "attempt": 5, "distance": 14.95}, {"mark": 1, "attempt": 6, "distance": 14.73}]",43,19
+"[{"mark": 1, "attempt": 1, "distance": 18.35}, {"mark": 1, "attempt": 2, "distance": 16.98}, {"mark": 1, "attempt": 3, "distance": 15.34}, {"mark": 1, "attempt": 4, "distance": 18.25}, {"mark": 1, "attempt": 5, "distance": 18.37}, {"mark": 1, "attempt": 6, "distance": 17.21}]",52,19
+"{"time": "2.02.49"}",4,20
+"{"time": "2.13.75"}",115,20
+"{"time": "2.24.55"}",116,20
+"[{"mark": 1, "attempt": 1, "distance": 4.11}, {"mark": 1, "attempt": 2, "distance": 3.98}, {"mark": 1, "attempt": 3, "distance": 4.21}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 1, "attempt": 5, "distance": 4.19}, {"mark": 1, "attempt": 6, "distance": 4.25}]",83,21
+"{"time": "1.50.64"}",73,22
+"{"time": "1.35.84"}",94,22
+"{"time": "1.37.27"}",122,22
+"{"time": "2.56.57"}",48,23
+"{"time": "2.59.52"}",50,23
+"{"time": "3.09.36"}",51,23
+"[{"mark": 0, "attempt": 1, "distance": 0}, {"mark": 1, "attempt": 2, "distance": 11.32}, {"mark": 1, "attempt": 3, "distance": 12.06}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 0, "attempt": 6, "distance": 0}]",10,24
+"[{"mark": 1, "attempt": 1, "distance": 10.09}, {"mark": 1, "attempt": 2, "distance": 9.67}, {"mark": 1, "attempt": 3, "distance": 10.18}, {"mark": 1, "attempt": 4, "distance": 10.56}, {"mark": 1, "attempt": 5, "distance": 10.68}, {"mark": 1, "attempt": 6, "distance": 10.46}]",44,24
+"[{"mark": 1, "attempt": 1, "distance": 12.23}, {"mark": 1, "attempt": 2, "distance": 12.1}, {"mark": 1, "attempt": 3, "distance": 13.04}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 0, "attempt": 5, "distance": 0}, {"mark": 1, "attempt": 6, "distance": 13.3}]",105,24
+"[{"mark": 1, "attempt": 1, "distance": 12.49}, {"mark": 0, "attempt": 2, "distance": 0}, {"mark": 1, "attempt": 3, "distance": 12.62}, {"mark": 0, "attempt": 4, "distance": 0}, {"mark": 1, "attempt": 5, "distance": 12.54}, {"mark": 1, "attempt": 6, "distance": 11.6}]",106,24
+"{"time": "1.34.40"}",54,25
+"{"time": "2.05.42"}",56,25
+"{"time": "1.32.25"}",57,25
+"{"time": "1.34.88"}",60,25
+"{"time": "1.34.75"}",65,25
+"{"time": "1.53.72"}",74,25
+"{"time": "1.34.64"}",75,25
+"{"time": "13.29.06"}",61,27
+"{"time": "13.24.30"}",67,27
+"{"time": "10.16.57"}",55,28
+"{"time": "11.08.89"}",58,28
+"{"time": "10.44.78"}",64,28
+"{"time": "10.00.71"}",65,28

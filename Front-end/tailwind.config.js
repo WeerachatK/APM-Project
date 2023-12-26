@@ -1,33 +1,51 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {
-    },
-  },
   plugins: [],
   corePlugins: {
     position: true,
   },
   theme: {
     colors: {
-      'black': '#000',
-      'white': '#fff',
-      'blue': '#1fb6ff',
-      'purple': '#7e5bef',
-      'pink': '#ff49db',
-      'orange': '#ff7849',
-      'green': '#13ce66',
+      "Blue-700": "#142e4f",
+      "Blue-600": "#002880",
+      "Blue-500": "#0034a6",
+      "Blue-400": "#234693",
+      "Blue-300": "#335eff",
+      "Blue-200": "#d9e1f5",
+      "Blue-100": "#eef3ff",
+      "Purple-100": "#fbeeff",
+      "Purple-200": "#eed9f5",
+      "Purple-300": "#995bff",
+      "Purple-400": "#622393",
+      "Purple-500": "#4d00a6",
+      "Purple-600": "#380080",
+      "Purple-700": "#23144f",
+      "orange": "#cd5d20",
+      "cream": "#f9e2d5",
+      "black": "#000000",
+      "white": "#ffffff",
+      "green": "#10973b",
+      "red": "#d80000",
+      "yellow": "#fff500",
+      "gray-text": "#9f9f9f",
+      "gray-component": "#f1f1f1",
       'yellow': '#ffc82c',
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
       'menu-blue': 'rgba(0, 82, 255, 0.30)',
     },
+    boxShadow: {
+      "shadow-sm": "0px 1px 2px 0px rgba(0,0,0,0.05)",
+      "shadow-base": "0px 1px 2px 0px rgba(0,0,0,0.06), 0px 1px 3px 0px rgba(0,0,0,0.1)",
+      "shadow-md": "0px 2px 4px -1px rgba(0,0,0,0.06), 0px 4px 6px -1px rgba(0,0,0,0.1)",
+      "shadow-lg": "0px 4px 6px -2px rgba(0,0,0,0.05), 0px 10px 15px -3px rgba(0,0,0,0.1)",
+      "shadow-2xl": "0px 25px 50px -12px rgba(0,0,0,0.25)",
+      "shadow-inner": "inset 0px 2px 4px 0px rgba(0,0,0,0.06)"
+    },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-      inter: ['Inter', 'sans-serif'],
+      "sans": ['Inter var']
     },
     extend: {
       backgroundImage: theme => ({
@@ -44,6 +62,9 @@ module.exports = {
       height: {
         'screen-nav': 'calc(100vh - 3.5rem)',
       },
+      fontFamily: {
+        'inter': ['Inter Var'], // Adds a new `font-display` class
+      }
     }
   },
 };

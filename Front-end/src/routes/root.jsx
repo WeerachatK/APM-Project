@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './root.css'
 import { useSelector } from 'react-redux';
 import UserDropdown from '../components/userDropDown/index';
-import Filter from '../components/competitionPage/componants/filter';
-import EventFilter from '../components/eventPage/componants/eventFilter'
+import Filter from '../components/competitionPage/components/sidebar';
+import EventFilter from '../components/eventPage/components/eventFilter'
 import WebLogo from '../assets/images/Web-Logo2.svg'
 
 
 
 function LineHighlight() {
-  return (<div className='Line flex flex-col  items-center mb-2'>
+  return (<div className='Line flex flex-col  items-center'>
     <div className='bg-white h-[0.1rem]  w-[8.125rem]  '></div>
     <div className='bg-white h-[0.2rem] w-[10.625rem] mt-1 '></div>
   </div>)
@@ -56,15 +56,11 @@ function Profile({ profileData, onDropdownClick, DropdownOpen }) {
 
 function NoLogin() {
   return (
-    <div className='NoLogin w-full flex items-center justify-end mr-14'>
-      < Link to="/login">
-        <div className='rounded-full bg-[#004CEE] flex items-center justify-center font-inter px-6 p-1'>
-          <label class="text-center font-inter text-base font-normal text-[#fff] ">
-            Login/ Sign up
-          </label>
-        </div>
-      </Link>
-    </div>
+    < Link to="/login" className='h-full flex items-center flex-shrink-0'>
+      <div className='rounded-full h-8 w-full bg-[#004CEE] text-[#fff]  items-center justify-center text-center px-6 p-1'>
+        Login/ Sign up
+      </div>
+    </Link>
   )
 }
 
@@ -77,29 +73,29 @@ function Root() {
   };
   return (
     <>
-      <nav className='Navbar h-14 bg-[#002880] sticky top-0 px-[24px] flex flex-row z-10 '>
+      <nav className='Navbar h-14 bg-[#002880] sticky top-0 px-[24px] flex justify-between z-50'>
         <Link to="/">
-          <div className="group">
+          <div className="group flex flex-shrink-0 h-20 w-20">
             <img
-              className="absolute h-20 group-hover:h-28 transition-height duration-300"
+              className=" h-20 group-hover:h-28 transition-height duration-300 "
               src={WebLogo}
               alt="Logo"
             />
           </div>
         </Link>
-        <div className=' flex flex-row justify-between w-full'>
-          <div className='Menu pt-[12px] flex flex-row items-end pl-[100px] font-inter font-light text-[#fff]'>
-            <Link to="/" className={`Home MenuBox flex flex-col  ${display === 'home' && 'font-semibold  bg-menu-blue justify-end'}`}>
+        <div className=' flex flex-row justify-center items-center w-full '>
+          <div className='Menu flex flex-row  text-[#fff] mt-2 '>
+            <Link to="/" className={`Home MenuBox flex flex-col text-2xl  ${display === 'home' && 'font-bold '}`}>
               Home
               {display === 'home' && <LineHighlight />}
             </Link>
-            <Link to="/competition" className={`Competition MenuBox flex flex-col  ${(display === 'competition' || display === 'event') && 'font-semibold bg-menu-blue justify-end'}`}>
+            <Link to="/competition" className={`Competition MenuBox flex flex-col text-2xl  ${(display === 'competition' || display === 'event') && 'font-bold '}`}>
               Competition
               {(display === 'competition' || display === 'event') && <LineHighlight />}
             </Link>
           </div>
-          {profile ? <Profile profileData={profile} onDropdownClick={handleDropdownClick} DropdownOpen={isUserDropdownOpen} /> : <NoLogin />}
         </div>
+        {profile ? <Profile profileData={profile} onDropdownClick={handleDropdownClick} DropdownOpen={isUserDropdownOpen} /> : <NoLogin />}
       </nav>
       {isUserDropdownOpen && <UserDropdown handleClick={handleDropdownClick} />}
       {(display === 'competition') && <Filter />}
@@ -109,3 +105,16 @@ function Root() {
 }
 
 export default Root;
+
+// {/* <div className=' flex flex-row justify-center items-center w-full bg-orange'>
+// <div className='Menu flex flex-row  text-[#fff] bg-Purple-400'>
+//   <Link to="/" className={`Home MenuBox flex flex-col text-3xl ${display === 'home' && 'font-bold'}`}>
+//     Home
+//     {/* {display === 'home' && <LineHighlight />} */}
+//   </Link>
+//   <Link to="/competition" className={`Competition MenuBox flex flex-col text-3xl  ${(display === 'competition' || display === 'event') && 'font-bold '}`}>
+//     Competition
+//     {/* {(display === 'competition' || display === 'event') && <LineHighlight />} */}
+//   </Link>
+// </div>
+// </div> */}
