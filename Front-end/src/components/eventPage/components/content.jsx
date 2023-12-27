@@ -5,12 +5,12 @@ import { useSelector} from 'react-redux';
 import "./content.css"
 
 
-function Content() {
+function Content({ event }) {
     const eventDisplay = useSelector(state => state.eventDisplay);
     return (
        <>
-       {eventDisplay === 'start-list' && <StartList/>}
-       {eventDisplay === 'result' && <Result/>}
+       {eventDisplay === 'start-list' && <StartList event = { event }/>}
+       {eventDisplay === 'result' && <Result event = { event }/>}
        {/* {eventDisplay === 'official' && <StartList/>} */}
        </>
     )

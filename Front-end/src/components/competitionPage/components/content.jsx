@@ -7,66 +7,37 @@ import { setFilterDay } from '../../../redux/slices/filterDaySlice';
 import { setFilterSex } from '../../../redux/slices/filterSexSlice';
 import { selectSportFilter } from '../../../redux/slices/sportFilterSlice';
 import { discusThrowIcon, javelinThrowingIcon, sprintRunningIcon, longJumpIcon } from '../../../assets/icon/iconIndex';
-// import TournamentCard from "./TournamentCard";
+import {formatDate, formatTime} from '../../date_time_format'
+import TournamentCard from "./TournamentCard";
 
-function TournamentCard({ event }) {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/competition/event', { state: { event } });
-  };
-  const eventTypeIconMap = {
-    sprintRunning: sprintRunningIcon,
-    javelinThrowing: javelinThrowingIcon,
-    discusThrow: discusThrowIcon,
-    longJump: longJumpIcon
-  };
-  const formatDate = (dateTime) => {
-    const date = new Date(dateTime);
-    const day = date.getDate();
-    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-  // const formatDate = (date) => {
-  //   const [year, month, day] = date.split('-');
-  //   const months = {
-  //     'Jan': 'JAN',
-  //     'Feb': 'FEB',
-  //     'Mar': 'MAR',
-  //     'Apr': 'APR',
-  //     'May': 'MAY',
-  //     'Jun': 'JUN',
-  //     'Jul': 'JUL',
-  //     'Aug': 'AUG',
-  //     'Sep': 'SEP',
-  //     'Oct': 'OCT',
-  //     'Nov': 'NOV',
-  //     'Dec': 'DEC',
-  //   };
-  //   return `${day} ${months[month]} ${year}`;
-  // };
 
-  return (
-    <div className="card-container" onClick={handleClick}>
-      <div className="card-head">
-        <div className="time">{formatTime(event.event_date_time)}</div>
-        <div className="gender">{event.event_gender}</div>
-      </div>
-      <div className="card-body flex justify-center items-center h-[165px]">
-        {/* <img className="h-[165px]" src={eventTypeIconMap[event.eventType]} alt={event.eventType} /> */}
-      </div>
-      <div className="card-foot">
-        <div className={`date px-2 py-1 text-sm ${event.status ? 'bg-green-x-gradient' : 'bg-blue-x-gradient'}`}>
-          {formatDate(event.event_date_time)}
-        </div>
-        <div className="sport-name h-14 px-2 py-1 text-lg">
-          {event.event_name}
-        </div>
-      </div>
-    </div>
-  );
-}
+
+// function TournamentCard({ event }) {
+//   const navigate = useNavigate();
+//   const handleClick = () => {
+//     navigate('/competition/event', { state: { event } });
+//   };
+
+//   return (
+//     <div className="card-container" onClick={handleClick}>
+//       <div className="card-head">
+//         <div className="time">{formatTime(event.event_date_time)}</div>
+//         <div className="gender">{event.event_gender}</div>
+//       </div>
+//       <div className="card-body flex justify-center items-center h-[165px]">
+//         {/* <img className="h-[165px]" src={eventTypeIconMap[event.eventType]} alt={event.eventType} /> */}
+//       </div>
+//       <div className="card-foot">
+//         <div className={`date px-2 py-1 text-sm ${event.status ? 'bg-green-x-gradient' : 'bg-blue-x-gradient'}`}>
+//           {formatDate(event.event_date_time)}
+//         </div>
+//         <div className="sport-name h-14 px-2 py-1 text-lg">
+//           {event.event_name}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 function FilterButton({ label, value, selectedValue, onClick }) {
   return (
@@ -78,21 +49,7 @@ function FilterButton({ label, value, selectedValue, onClick }) {
   );
 }
 
-function formatTime(dateTime) {
-  const date = new Date(dateTime);
-  let hours = date.getHours();
-  const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-}
 
-// function formatTime(time) {
-//   const [hours, minutes] = time.split(':');
-//   const ampm = hours >= 12 ? 'PM' : 'AM';
-//   const newHours = hours % 12 || 12;
-//   return `${newHours}:${minutes} ${ampm}`;
-// }
 
 function Content() {
   const dispatch = useDispatch();

@@ -37,9 +37,7 @@ function OrderCard({ orderNumber, id, name, backgroundColor, result, Type }) {
     );
 }
 
-function Result() {
-    const location = useLocation();
-    const event = location.state?.event;
+function Result({ event }) {
 
     const formatTime = (time) => {
         const [hours, minutes] = time.split(':');

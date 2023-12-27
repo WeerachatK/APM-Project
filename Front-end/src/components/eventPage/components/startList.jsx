@@ -1,9 +1,12 @@
 // startList.jsx
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import "./content.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEventById } from '../../../redux/slices/fetchEventByIdSlice';
+import { formatDate, formatTime } from '../../date_time_format'
 
-function OrderCard({ orderNumber, bib, name, backgroundColor }) {
+function OrderCard({ orderNumber, bib, firstName, lastName, backgroundColor }) {
+    const fullName = `${firstName} ${lastName}`;
     return (
         <div className={`Order mt-6 bg-[${backgroundColor}] h-[120px] w-full text-center flex justify-between items-center text-lg font-semibold`}>
             <div className='w-full flex justify-between'>
@@ -15,36 +18,33 @@ function OrderCard({ orderNumber, bib, name, backgroundColor }) {
                     {/* <img src="" alt="" /> */}
                 </div>
                 <div className='flex flex-col justify-end items-start px-5'>
-                    <p>{name}</p>
+                    <p>{fullName}</p>
                 </div>
             </div>
         </div>
     );
 }
 
-function StartList() {
-    const location = useLocation();
-    const event = location.state?.event;
-    const formatTime = (time) => {
-        const [hours, minutes] = time.split(':');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const newHours = hours % 12 || 12;
-        return `${newHours}:${minutes} ${ampm}`;
-    };
+function StartList({ event }) {
 
-    const formatDate = (date) => {
-        const [year, month, day] = date.split('-');
-        return `${day} ${month} ${year}`;
-    };
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (event && event.id) {
+            dispatch(fetchEventById(event.id));
+        }
+    }, [dispatch, event]);
+
+
+    const eventByid = useSelector(state => state.fetchEventById.data);
     return (
         <div className='p-8'>
             <div className='w-[70%] border-b-4 border-[#002880]'>
-                <div className='text-3xl text-[#002880] font-semibold'>{event?.eventName}</div>
+                <div className='text-3xl text-[#002880] font-semibold'>{event?.event_name}</div>
                 <div className='text-base text-[#002880] font-normal '>
                     <span>{event?.event_gender}</span> Event -
-                    <span>{" " + formatTime(event?.eventTime)} </span> -
-                    <span>{" " + formatDate(event?.eventDate)}</span>
+                    <span>{" " + formatTime(event?.event_date_time)} </span> -
+                    <span>{" " + formatDate(event?.event_date_time)}</span>
                 </div>
             </div>
             <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex justify-between items-center text-lg font-semibold'>
@@ -57,16 +57,26 @@ function StartList() {
                 </div>
             </div>
             <div>
-                {event?.result?.map((athlete, index) => (
+                {eventByid?.map((athlete, index) => (
                     <OrderCard
                         key={index}
                         orderNumber={index + 1}
                         bib={athlete.bib}
-                        name={athlete.athleteName}
+                        firstName={athlete.first_name}
+                        lastName={athlete.last_name}
                         backgroundColor={index % 2 === 0 ? '#EEF3FF' : '#FFF'}
                     />
                 ))}
             </div>
+            {/* <div>
+                {eventByid?.map((athlete, index) => (
+                    <div key={index} className="athlete">
+                        <div>Order: {index + 1}</div>
+                        <div>BIB: {athlete.bib}</div>
+                        <div>Name: {athlete.first_name} {athlete.last_name}</div>
+                    </div>
+                ))}
+            </div> */}
         </div>
     );
 }
