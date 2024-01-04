@@ -128,6 +128,14 @@ module.exports = function (connection) {
  *                 type: string
  *               SPORT_id:
  *                 type: integer
+ *               event_number:
+ *                 type: string
+ *               committee_id:
+ *                 type: integer
+ *               remark:
+ *                 type: string
+ *               score_format:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Event added successfully.
@@ -140,14 +148,11 @@ module.exports = function (connection) {
         if (!req.body.event_date_time) {
             return res.status(400).send('event_date_time is required');
         }
-        // The column names should match the actual columns of your EVENTS table.
         const query = `
             INSERT INTO \`apm-project\`.EVENTS 
-            (event_name, event_class, event_description, event_date_time, event_gender, status, event_location, SPORT_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+            (event_name, event_class, event_description, event_date_time, event_gender, status, event_location, SPORT_id, event_number, committee_id, remark, score_format) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `;
-        // const eventDateTime = new Date(req.body.event_date_time).toISOString().replace('T', ' ').replace('Z', '').slice(0, 19);
-        // The order of req.body properties should match the order of columns in the query.
         connection.query(query, [
             req.body.event_name,
             req.body.event_class,
@@ -156,7 +161,10 @@ module.exports = function (connection) {
             req.body.event_gender,
             req.body.status,
             req.body.event_location,
-            req.body.SPORT_id
+            req.body.SPORT_id,
+            req.body.event_number,
+            req.body.committee_id,
+            req.body.remark
         ], (err, result) => {
             if (err) {
                 console.error('SQL Error:', err.message);
@@ -166,6 +174,7 @@ module.exports = function (connection) {
             }
         });
     });
+    
 
     /**
  * @swagger
@@ -202,30 +211,33 @@ module.exports = function (connection) {
         const eventId = req.params.id;
         const updateFields = [];
         const updateValues = [];
-
-        // For each possible field, check if it was provided in the request body
-        const possibleFields = ['event_name', 'event_class', 'event_description', 'event_date_time', 'event_gender', 'status', 'event_location', 'SPORT_id'];
+    
+        // Including new fields in the possibleFields array
+        const possibleFields = [
+            'event_name', 'event_class', 'event_description', 'event_date_time',
+            'event_gender', 'status', 'event_location', 'SPORT_id',
+            'event_number', 'committee_id', 'remark', 'score_format'
+        ];
+    
         possibleFields.forEach(field => {
             if (req.body.hasOwnProperty(field)) {
                 updateFields.push(`${field} = ?`);
                 updateValues.push(req.body[field]);
             }
         });
-
+    
         if (updateFields.length === 0) {
             return res.status(400).send('No fields provided for update.');
         }
-
-        // Add the eventId to the updateValues array
+    
         updateValues.push(eventId);
-
+    
         const query = `
             UPDATE \`apm-project\`.EVENTS 
             SET ${updateFields.join(', ')}
             WHERE id = ?;
         `;
-
-        // Perform the query, passing the updateValues array
+    
         connection.query(query, updateValues, (err, result) => {
             if (err) {
                 console.error(err);
@@ -235,6 +247,7 @@ module.exports = function (connection) {
             }
         });
     });
+    
 
     /**
  * @swagger

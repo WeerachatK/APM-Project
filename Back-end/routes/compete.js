@@ -120,6 +120,8 @@ module.exports = function (connection) {
  *                     type: string
  *                   last_name:
  *                     type: string
+ *                   disability_class:
+ *                     type: string
  *                   bib:
  *                     type: string
  *                   country:
@@ -158,6 +160,7 @@ router.get('/competitions/events/:event_id', (req, res) => {
             a.id AS athlete_id,
             a.first_name, 
             a.last_name, 
+            a.disability_class,
             a.bib, 
             a.country,
             a.date_of_birth, 
