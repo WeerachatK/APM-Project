@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './root.css'
 import { useSelector } from 'react-redux';
 import UserDropdown from '../components/userDropDown/index';
-import Filter from '../components/competitionPage/components/sidebar';
-import EventFilter from '../components/eventPage/components/eventFilter'
+import SideBarMenu from '../components/competitionPage/components/sidebar';
+import EventSideBar from '../components/eventPage/components/eventSidebar'
 import WebLogo from '../assets/images/Web-Logo2.svg'
 
 
@@ -98,8 +98,8 @@ function Root() {
         {profile ? <Profile profileData={profile} onDropdownClick={handleDropdownClick} DropdownOpen={isUserDropdownOpen} /> : <NoLogin />}
       </nav>
       {isUserDropdownOpen && <UserDropdown handleClick={handleDropdownClick} />}
-      {(display === 'competition') && <Filter />}
-      {(display === 'event') && <EventFilter />}
+      {(display === 'competition') && <SideBarMenu />}
+      {(display === 'event') && <EventSideBar />}
     </>
   );
 }

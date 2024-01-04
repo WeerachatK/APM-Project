@@ -6,10 +6,11 @@ const cors = require('cors');
 const port = 3001;
 const swaggerUi = require('swagger-ui-express')
 const swaggerJsdoc = require('swagger-jsdoc')
-const eventApi = require('./routes/event');
-const newApi = require('./routes/news');
-const AthleteApi = require('./routes/athlete');
+const EventAPI = require('./routes/event');
+const NewAPI = require('./routes/news');
+const AthleteAPI = require('./routes/athlete');
 const CompeteAPI = require('./routes/compete');
+const SportsAPI = require('./routes/sport');
 
 app.use(cors());
 app.use(express.json());
@@ -26,10 +27,13 @@ connection.connect((err) => {
     } else {
         console.log('Connected to MySQL!');
         app.use('/api',
-        eventApi(connection),
-        newApi(connection ),
+        EventAPI(connection),
+        NewAPI(connection ),
         CompeteAPI(connection ),
-        AthleteApi(connection ));
+        AthleteAPI(connection ),
+        SportsAPI(connection)
+        );
+       
     }
 });
 
@@ -56,7 +60,8 @@ const swaggerOptions = {
     apis: ['./routes/event.js',
             './routes/news.js',
             './routes//compete.js',
-            './routes/athlete.js'
+            './routes/athlete.js',
+            './routes/sport.js',
         ]
 }
 

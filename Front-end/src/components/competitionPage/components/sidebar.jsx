@@ -3,9 +3,33 @@ import "./filter.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../../redux/slices/filterSlice';
 import { setSportFilter, selectSportFilter } from '../../../redux/slices/sportFilterSlice';
-function Filter() {
+import { fetchEvents } from '../../../redux/slices/eventSlice';
+import { fetchSports } from '../../../redux/slices/sportSlice';
+function MenuCard({ event, handleFilterClick, sport, filter }) {
+  return (
+    <>
+      <div
+        className={`sport-item ${filter === sport.id && 'sport-item-active'}`}
+        onClick={() => handleFilterClick(sport.id)}
+      >
+        {sport.sub_type} Event
+      </div>
+    </>
+  )
+}
+
+function SideBarMenu() {
   const dispatch = useDispatch();
   const filter = useSelector(selectSportFilter);
+
+  React.useEffect(() => {
+    dispatch(fetchEvents());
+    dispatch(fetchSports());
+  }, [dispatch])
+  const events = useSelector(state => state.event.data);
+  const sports = useSelector(state => state.sport.data);
+  // const isLoading = useSelector(state => state.event.loading);
+  // const error = useSelector(state => state.event.error);
 
   const handleFilterClick = (filterValue) => {
     dispatch(setSportFilter(filterValue));
@@ -16,41 +40,42 @@ function Filter() {
         <div className='sport-container'>
           <h1>Sports type</h1>
           <div
-        className={`sport-item ${filter === 'All' && 'sport-item-active'}`}
-        onClick={() => handleFilterClick('All')}
-      >
-        All
-      </div>
-      <div
-        className={`sport-item ${filter === 'Track Events' && 'sport-item-active'}`}
-        onClick={() => handleFilterClick('Track Events')}
-      >
-        Track Events
-      </div>
-      <div
-        className={`sport-item ${filter === 'Road Races' && 'sport-item-active'}`}
-        onClick={() => handleFilterClick('Road Races')}
-      >
-        Road Races
-      </div>
-      <div
-        className={`sport-item ${filter === 'Field Events' && 'sport-item-active'}`}
-        onClick={() => handleFilterClick('Field Events')}
-      >
-        Field Events
-      </div>
+            className={`sport-item ${filter === 'All' && 'sport-item-active'}`}
+            onClick={() => handleFilterClick('All')}
+          >
+            All
+          </div>
+          {sports.map((sport) => (
+              <MenuCard 
+                key={sport.id} 
+                event={events} 
+                handleFilterClick={handleFilterClick} 
+                sport={sport}
+                filter={filter}
+            />
+          ))}
+          {/* แสดง * sports.sub_type */}
+          {/* {sports.map(sport => (
+            <MenuCard 
+                key={sport.id} 
+                event={events} 
+                handleFilterClick={handleFilterClick} 
+                sport={sport}
+            />
+        ))} */}
           {/* <a className={`sport-item ${filter === 'The Sprints' && 'sport-item-active'}`} href="" onClick={handleFilterClick}>The Sprints</a>
           <a className={`sport-item ${filter === 'Combined Competitions' && 'sport-item-active'}`} href="" onClick={handleFilterClick}>Combined Competitions</a>
           <a className={`sport-item ${filter === 'Cross-Country Races' && 'sport-item-active'}`} href="" onClick={handleFilterClick}>Cross-Country Races</a> */}
         </div>
-        <div v className='map-container'>
+        <div className='map-container'>
           <div className="map-image">
             {/* <img src="https://www.google.com/maps/d/thumbnail?mid=1IiSZmA46ha-bnHijm9cdN-kwVwI&hl=en_US" alt="Description" className="object-cover w-full h-full" /> */}
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.7830320328017!2d100.43658159678957!3d13.852058400000017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29b0f7bff3665%3A0x3a00557b9f0e2d47!2sNonthaburi%20Stadium!5e0!3m2!1sth!2sth!4v1698325079922!5m2!1sth!2sth" width="100%" height="300"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1304.9833736696628!2d102.04968662049286!3d14.927479122976726!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311eb2c1fbbc0131%3A0xbcc4725147c5b872!2z4Liq4LiZ4Liy4Lih4LiB4Li14Lis4Liy4LmA4LiJ4Lil4Li04Lih4Lie4Lij4Liw4LmA4LiB4Li14Lii4Lij4LiV4Li0IDgwIOC4nuC4o-C4o-C4qeC4siA1IOC4mOC4seC4meC4p-C4siAyNTUw!5e1!3m2!1sth!2sth!4v1704254380311!5m2!1sth!2sth" 
+            className='w-full h-[20%]'></iframe>
           </div>
           <div className='map-text'>
-            <div className='map-location'>Nonthaburi Stadium</div>
-            <div className='map-subscrib' >67/90 Bang Len Soi 15, Bang Len Subdistrict, Bang Yai District, Nonthaburi 11000</div>
+            <div className='map-location'>80th Birthday Stadium</div>
+            <div className='map-subscrib' >Suranari, Mueang Nakhon Ratchasima District, Nakhon Ratchasima 30000</div>
           </div>
         </div>
       </div>
@@ -58,4 +83,4 @@ function Filter() {
   )
 }
 
-export default Filter
+export default SideBarMenu

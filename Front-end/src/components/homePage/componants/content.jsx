@@ -3,10 +3,16 @@ import React from 'react'
 function content() {
   return (
     <>
-      <div className='flex flex-col flex-grow flex-wrap min-w-[80%] bg-gray mx-auto mt-[17px]'>
-        <div className='Content'>
-        </div>
-      </div>
+       <body className='flex flex-col h-full justify-evenly bg-Blue-300'>
+                <div className='bg-white  h-full flex justify-center items-center'>
+                    <img className='h-72 p-4' src={CoverImg} alt='Thai Para Cover image'/>
+                </div>
+                <div className=' bg-yellow h-full'>2</div>
+                <div className='h-full'>
+                    {/* <SlideShow /> */}3
+                </div>
+                <div className='bg-Purple-400 h-full'>4</div>
+            </body>
     </>
   )
 }

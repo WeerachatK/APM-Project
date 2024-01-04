@@ -47,7 +47,6 @@ function SlideShow() {
 
   return (
     <div className=" overflow-hidden min-w-[100%]  relative">
-      {/* ... (ตามด้วยส่วนอื่นๆของโค้ดของคุณ) */}
       <div
         className="SliderShow whitespace-nowrap transition-transform duration-1000 top-0 left-0 w-full h-full "
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
@@ -74,7 +73,7 @@ function SlideShow() {
                   </button>
                 </a>
                 <img
-                  className="inline-block h-screen-nav w-full object-cover object-top Shadow"
+                  className="inline-block h-96 w-full object-cover object-top Shadow"
                   src={article.urlToImage}
                   alt={article.title}
                 />

@@ -14,6 +14,19 @@ export function formatDate(dateTime) {
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
   };
+export function calculateAge(dateOfBirth) {
+    const birthDate = new Date(dateOfBirth);
+    const currentDate = new Date();
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const m = currentDate.getMonth() - birthDate.getMonth();
+  
+    if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
+      age--;
+    }
+  
+    return age;
+  }
+  
 // function eventTypeIconMap {
 //     sprintRunning: sprintRunningIcon,
 //     javelinThrowing: javelinThrowingIcon,

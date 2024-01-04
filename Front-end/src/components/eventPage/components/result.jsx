@@ -1,89 +1,134 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import "./content.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEventById } from '../../../redux/slices/fetchEventByIdSlice';
+import { formatDate, formatTime, calculateAge } from '../../date_time_format';
+import Profile from '../../../assets/images/male_profile.png';
 
-
-function OrderCard({ orderNumber, id, name, backgroundColor, result, Type }) {
-    return (
-        <div className={`Order mt-6 bg-[${backgroundColor}] h-[120px] w-full text-center flex justify-between items-center text-lg font-semibold`}>
-            <div className='w-[30%] flex justify-between flex-shrink-0'>
-                <div className='w-full'>{orderNumber}</div>
-                <div className='w-full'>{id}</div>
+function TimeScore({ athlete }) {
+    return (<div className='w-1/2 h-full flex justify-center py-4'>
+        <div className='h-full w-2/3 flex flex-col rounded-lg border border-Blue-700 '>
+            <div className='bg-Blue-700 text-white h-1/2 rounded-t-lg flex justify-center items-center text-xl'>
+                Result
             </div>
-            <div className='w-full flex justify-between'>
-                <div className='w-full p-2 flex'>
-                    <div className='IMG bg-black rounded-lg h-[100px] w-[120px] flex-shrink-0 object-cover ml-[15%]'>
-                        <img src="" alt="" />
-                    </div>
-                    <div className='Name flex flex-col justify-end items-start px-5 flex-shrink-0'>
-                        <p>{name}</p>
-                    </div>
+            <div className='bg-white text-Blue-700 flex justify-center items-center text-xl h-1/2  rounded-b-lg'>
+                {athlete?.score?.time + " s."}
+            </div>
+        </div>
+
+    </div>
+    );
+}
+
+function DistanceScore({ athlete }) {
+    const scores = Array.isArray(athlete?.score) ? athlete.score : [];
+    const maxDistance = Math.max(...scores.map(s => s.distance) || [0]);
+    return (
+        <div className='w-4/5 h-full flex justify-center p-2'>
+            <div className='h-full w-full flex flex-col rounded-lg border border-Blue-700 '>
+                <div className='bg-Blue-700 text-white h-1/4 rounded-t-lg flex justify-center items-center text-lg'>
+                    Attempt
                 </div>
-                <div className='w-full p-2'>
-                    <div className='Result w-full h-full flex flex-col justify-center items-center object-cover'>
-                        <span className='text-[#142E4F]'>Finish Time</span>
-                        <div className='w-[30%] h-full rounded-lg border border-[#142E4F]'>
-                            <div className='w-full bg-[#142E4F] h-[50%] rounded-t-lg text-white text-sm font-light flex justify-center items-center'>
-                                Result {Type === 'longJump' ? '(meter)' : ''}
-                            </div>
-                            <div className='w-full  h-[50%] text-[#142E4F] text-sm font-semibold flex justify-center items-center'>
-                                {result}
-                            </div>
+                <div className='grid grid-cols-3 grid-rows-2 gap-1 p-2'>
+                    {scores.map((score, index) => (
+                        <div key={index} className={`border  text-xs flex text-gray-dark  ${score.distance === maxDistance ? 'border-green' : 'border-Blue-700'}`}>
+                            <p className={`flex-shrink-0 w-[30%] text-white flex justify-center items-center ${score.distance === maxDistance ? 'font-bold text-black bg-green' : 'bg-Blue-700'}`}>
+                                A{score.attempt}
+                            </p>
+                            <p className={`bg-white w-full flex justify-end items-center p-1 ${score.distance === maxDistance ? 'font-bold text-black' : ''}`}>
+                                {score.distance} m.
+                            </p>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>
     );
 }
 
+function OrderCard({ orderNumber, athlete, format }) {
+    const fullName = `${athlete.first_name} ${athlete.last_name}`;
+    const ManProfile = "https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png";
+    const WomanProfile = "https://www.nicepng.com/png/detail/377-3778780_helper4u-maid-bai-cook-chef-empty-profile-picture.png";
+    const renderScore = () => {
+        switch (format) {
+            case 'distance':
+                return <DistanceScore athlete={athlete} />;
+            case 'time':
+                return <TimeScore athlete={athlete} />;
+            default:
+                return null;
+        }
+    };
+    return (
+        <div className={`Order mt-2  h-[120px] w-full text-center flex justify-between items-center ${orderNumber % 2 === 0 ? ' bg-white' : ' bg-Blue-100'}`}>
+            <div className='w-full flex justify-between text-lg font-semibold'>
+                <p className='w-full'>{orderNumber}</p>
+                <p className='w-full'>{athlete.bib}</p>
+                <p className='w-full'>{athlete.country}</p>
+                <p className='w-full'>{athlete.disability_class}</p>
+            </div>
+            <div className='w-full p-2 flex'>
+                <div className='bg-black rounded-lg h-[100px] w-[120px] flex-shrink-0 overflow-hidden'>
+                    <img className='object-cover w-full h-full' src={athlete.event_gender === 'Women' ? WomanProfile : ManProfile} alt="" />
+                </div>
+                <div className='flex flex-col justify-center items-start px-5 w-full'>
+                    <div className='flex items-center  h-full '>
+                        <p className='text-xl font-semibold text-left'>{fullName}</p>
+                    </div>
+                    <p className='text-lg text-left mt-auto'>Age: {calculateAge(athlete.date_of_birth)}</p>
+                </div>
+            </div>
+            {renderScore()}
+        </div>
+    );
+}
+
 function Result({ event }) {
 
-    const formatTime = (time) => {
-        const [hours, minutes] = time.split(':');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const newHours = hours % 12 || 12;
-        return `${newHours}:${minutes} ${ampm}`;
-    };
+    const dispatch = useDispatch();
 
-    const formatDate = (date) => {
-        const [year, month, day] = date.split('-');
-        return `${day} ${month} ${year}`;
-    };
+    useEffect(() => {
+        if (event && event.id) {
+            dispatch(fetchEventById(event.id));
+        }
+    }, [dispatch, event]);
 
+
+    const eventByid = useSelector(state => state.fetchEventById.data);
     return (
         <div className='p-8'>
             <div className='w-[70%] border-b-4 border-[#002880]'>
-                <div className='text-3xl text-[#002880] font-semibold'>{event?.eventName}</div>
+                <div className='text-3xl text-[#002880] font-semibold'>{event?.event_description}</div>
                 <div className='text-base text-[#002880] font-normal '>
                     <span>{event?.event_gender}</span> Event -
-                    <span>{" " + formatTime(event?.eventTime)} </span> -
-                    <span>{" " + formatDate(event?.eventDate)}</span>
+                    <span>{" " + formatTime(event?.event_date_time)} </span> -
+                    <span>{" " + formatDate(event?.event_date_time)}</span>
                 </div>
             </div>
-            <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex items-center text-lg font-semibold'>
-                <div className='w-[30%] flex justify-between flex-shrink-0'>
-                    <div className='w-full'>Order</div>
-                    <div className='w-full'>BIB</div>
-                </div>
+            <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex justify-between items-center text-lg font-semibold'>
                 <div className='w-full flex justify-between'>
-                    <div className='w-full'>Name</div>
-                    <div className='w-full'>Result</div>
+                    <p className='w-full'>Order</p>
+                    <p className='w-full'>BIB</p>
+                    <p className='w-full'>Country</p>
+                    <p className='w-full'>Class</p>
+                </div>
+                <div className='w-full'>
+                    Name
+                </div>
+                <div className={`${event.score_format === 'distance' ? 'w-4/5' : 'w-1/2'}`}>
+                    Score
                 </div>
             </div>
 
-
-            {event?.status ? (
+            {event?.status === "finish" ? (
                 <div>
-                    {event?.result?.map((athlete, index) => (
+                    {eventByid?.map((athlete, index, format) => (
                         <OrderCard
                             key={index}
                             orderNumber={index + 1}
-                            id={athlete.bib}
-                            name={athlete.athleteName}
-                            backgroundColor={index % 2 === 0 ? '#EEF3FF' : '#FFF'}
-                            result={athlete.score}
-                            Type={event.eventType}
+                            athlete={athlete}
+                            format={event.score_format}
                         />
                     ))}
                 </div>
@@ -95,5 +140,6 @@ function Result({ event }) {
         </div>
     );
 }
+
 
 export default Result;

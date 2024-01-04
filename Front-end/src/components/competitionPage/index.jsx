@@ -3,10 +3,8 @@ import Content from './components/content';
 import { useDispatch } from 'react-redux';
 import { setDisplay } from '../../redux/slices/displaySlice';
 import "./index.css"
-
 function Index() {
     const dispatch = useDispatch();
-
     React.useEffect(() => {
         dispatch(setDisplay('competition'));
     }, [dispatch]);
@@ -22,5 +20,4 @@ function Index() {
         </>
     )
 }
-
 export default Index
