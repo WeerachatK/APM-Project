@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
 // สร้าง async thunk สำหรับการดึงข้อมูล sports
 export const fetchSports = createAsyncThunk(
   'sport/fetchSports',
   async () => {
-    const response = await axios.get('http://localhost:3001/api/sports');
-    return response.data; // ส่งกลับข้อมูลที่ได้จาก API
-  }
+    const API_URL = import.meta.env.VITE_API_URL;
+    const response = await axios.get(`${API_URL}/sports`);
+   return response.data; // ส่งกลับข้อมูลที่ได้จาก API
+ }
 );
 
 const sportSlice = createSlice({

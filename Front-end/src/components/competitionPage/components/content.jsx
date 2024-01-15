@@ -116,48 +116,50 @@ function Content() {
 
 
   return (
-    <div className="container-content">
-      <div className="content-filter">
-        <div className="filter-day ">
-          <div className="text-3xl text-[#002880] font-semibold mr-5">DAY</div>
-          {dayButtons.map((btn) => (
-            <FilterButton
-              key={btn.value}
-              label={btn.label}
-              value={btn.value}
-              selectedValue={filterDay}
-              onClick={handleDayClick}
-            />
-          ))}
-        </div>
-        <div className="line border-b-4 border-Blue-600 my-2" />
-        <div className="filter-event">
-          <div className="text-3xl text-[#002880] font-semibold mr-5">
-            EVENTS
+    <div className="container-content justify-between  h-screen-nav">
+      <div>
+        <div className="content-filter">
+          <div className="filter-day ">
+            <div className="text-3xl text-[#002880] font-semibold mr-5">DAY</div>
+            {dayButtons.map((btn) => (
+              <FilterButton
+                key={btn.value}
+                label={btn.label}
+                value={btn.value}
+                selectedValue={filterDay}
+                onClick={handleDayClick}
+              />
+            ))}
           </div>
-          {sexButtons.map((btn) => (
-            <FilterButton
-              key={btn.value}
-              label={btn.label}
-              value={btn.value}
-              selectedValue={filterSex}
-              onClick={handleSexClick}
-            />
-          ))}
-          <button
-            className={`ButtonFilter ml-auto ${!sortByFinish && 'bg-Blue-600 text-white'}`}
-            onClick={handleFinishClick}>
-            Finish
-          </button>
+          <div className="line border-b-4 border-Blue-600 my-2" />
+          <div className="filter-event">
+            <div className="text-3xl text-[#002880] font-semibold mr-5">
+              EVENTS
+            </div>
+            {sexButtons.map((btn) => (
+              <FilterButton
+                key={btn.value}
+                label={btn.label}
+                value={btn.value}
+                selectedValue={filterSex}
+                onClick={handleSexClick}
+              />
+            ))}
+            <button
+              className={`ButtonFilter ml-auto ${!sortByFinish && 'bg-Blue-600 text-white'}`}
+              onClick={handleFinishClick}>
+              Finish
+            </button>
 
+          </div>
+        </div>
+        <div className="content-event ">
+          {currentEvents.map(event => (
+            <TournamentCard key={event.id} event={event} />
+          ))}
         </div>
       </div>
-      <div className="content-event">
-        {currentEvents.map(event => (
-          <TournamentCard key={event.id} event={event} />
-        ))}
-      </div>
-      <div className="flex justify-center p-4 bg-Blue-600">
+      <div className="Pagination flex justify-center p-4 bg-Blue-600 bottom-0">
         <div className=' bg-white p-1 px-6 rounded-full'>
           <Pagination
             count={Math.ceil(sortedEvents.length / itemsPerPage)}
@@ -169,7 +171,7 @@ function Content() {
           />
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import React from 'react';
 import axios from 'axios';
 
 export const fetchEventById = createAsyncThunk(
   'event/fetchEventById',
   async (eventId) => {
-    const response = await axios.get(`http://localhost:3001/api/competitions/events/${eventId}`);
+    const API_URL = import.meta.env.VITE_API_URL;;
+    const response = await axios.get(`${API_URL}/competitions/events/${eventId}`);
     return response.data;
   }
 );

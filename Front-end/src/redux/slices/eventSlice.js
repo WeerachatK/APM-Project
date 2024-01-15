@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import React from 'react';
 import axios from 'axios';
 
 // สร้าง async thunk
 export const fetchEvents = createAsyncThunk(
   'event/fetchEvents',
   async () => {
-    const response = await axios.get('http://localhost:3001/api/events');
+    const API_URL = import.meta.env.VITE_API_URL;;
+    const response = await axios.get(`${API_URL}/events`);
     return response.data; // ส่งกลับข้อมูลที่ได้จาก API
   }
 );
