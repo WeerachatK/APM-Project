@@ -136,6 +136,8 @@ module.exports = function (connection) {
  *                 type: string
  *               score_format:
  *                 type: string
+ *               icon:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Event added successfully.
@@ -145,26 +147,34 @@ module.exports = function (connection) {
  *         description: Error adding event to the database.
  */
     router.post('/events', (req, res) => {
-        if (!req.body.event_date_time) {
-            return res.status(400).send('event_date_time is required');
+        // Required fields
+        const requiredFields = ['event_name', 'event_class', 'event_date_time', 'event_gender', 'status', 'SPORT_id', 'event_number'];
+        for (let field of requiredFields) {
+            if (!req.body[field]) {
+                return res.status(400).send(`${field} is required`);
+            }
         }
+    
         const query = `
             INSERT INTO \`apm-project\`.EVENTS 
-            (event_name, event_class, event_description, event_date_time, event_gender, status, event_location, SPORT_id, event_number, committee_id, remark, score_format) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            (event_name, event_class, event_description, event_date_time, event_gender, status, event_location, SPORT_id, event_number, committee_id, remark, score_format, icon) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `;
+    
         connection.query(query, [
             req.body.event_name,
             req.body.event_class,
-            req.body.event_description,
+            req.body.event_description || null, 
             req.body.event_date_time,
             req.body.event_gender,
             req.body.status,
-            req.body.event_location,
+            req.body.event_location || null,
             req.body.SPORT_id,
             req.body.event_number,
-            req.body.committee_id,
-            req.body.remark
+            req.body.committee_id || null,
+            req.body.remark || null,
+            req.body.score_format || null,
+            req.body.icon || null
         ], (err, result) => {
             if (err) {
                 console.error('SQL Error:', err.message);
@@ -174,6 +184,7 @@ module.exports = function (connection) {
             }
         });
     });
+    
     
 
     /**
@@ -216,7 +227,7 @@ module.exports = function (connection) {
         const possibleFields = [
             'event_name', 'event_class', 'event_description', 'event_date_time',
             'event_gender', 'status', 'event_location', 'SPORT_id',
-            'event_number', 'committee_id', 'remark', 'score_format'
+            'event_number', 'committee_id', 'remark', 'score_format','icon'
         ];
     
         possibleFields.forEach(field => {

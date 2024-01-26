@@ -5,6 +5,7 @@ import { fetchEventById } from '../../../redux/slices/fetchEventByIdSlice';
 import { formatDate, formatTime, calculateAge } from '../../date_time_format';
 import Profile from '../../../assets/images/male_profile.png';
 
+
 function TimeScore({ athlete }) {
     return (<div className='w-1/2 h-full flex justify-center py-4'>
         <div className='h-full w-2/3 flex flex-col rounded-lg border border-Blue-700 '>
@@ -32,7 +33,7 @@ function DistanceScore({ athlete }) {
                 <div className='grid grid-cols-3 grid-rows-2 gap-1 p-2'>
                     {scores.map((score, index) => (
                         <div key={index} className={`border  text-xs flex text-gray-dark  ${score.distance === maxDistance ? 'border-green' : 'border-Blue-700'}`}>
-                            <p className={`flex-shrink-0 w-[30%] text-white flex justify-center items-center ${score.distance === maxDistance ? 'font-bold text-black bg-green' : 'bg-Blue-700'}`}>
+                            <p className={`flex-shrink-0 w-[30%] text-white flex justify-center items-center ${score.distance === maxDistance ? 'font-bold text-black bg-Green' : 'bg-Blue-700'}`}>
                                 A{score.attempt}
                             </p>
                             <p className={`bg-white w-full flex justify-end items-center p-1 ${score.distance === maxDistance ? 'font-bold text-black' : ''}`}>

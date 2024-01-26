@@ -4,6 +4,7 @@ import "./content.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEventById } from '../../../redux/slices/fetchEventByIdSlice';
 import { formatDate, formatTime, calculateAge } from '../../date_time_format'
+import WorldRC from './worldRC';
 
 
 function OrderCard({ orderNumber, athlete }) {
@@ -55,6 +56,10 @@ function StartList({ event }) {
                     <span>{" " + formatDate(event?.event_date_time)}</span>
                 </div>
             </div>
+            <WorldRC
+            event={event}
+            />
+
             <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex justify-between items-center text-lg font-semibold'>
                 <div className='w-full flex justify-between'>
                     <p className='w-full'>Order</p>

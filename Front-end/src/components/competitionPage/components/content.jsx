@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Modal } from 'flowbite-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../../redux/slices/eventSlice';
@@ -6,15 +7,17 @@ import "./content.css";
 import { setFilterDay } from '../../../redux/slices/filterDaySlice';
 import { setFilterSex } from '../../../redux/slices/filterSexSlice';
 import { selectSportFilter } from '../../../redux/slices/sportFilterSlice';
-import { discusThrowIcon, javelinThrowingIcon, sprintRunningIcon, longJumpIcon } from '../../../assets/icon/iconIndex';
+// import { discusThrowIcon, javelinThrowingIcon, sprintRunningIcon, longJumpIcon } from '../../../assets/icon/iconIndex';
 import TournamentCard from "./TournamentCard";
 import Pagination from '@mui/material/Pagination';
+import AddModal from './addEventModal'
+
 
 
 function FilterButton({ label, value, selectedValue, onClick }) {
   return (
     <button
-      className={`ButtonFilter ${value === selectedValue ? 'useFilter' : ''}`}
+      className={`ButtonFilter ${value === selectedValue ? 'bg-Blue-200 border-1 border-Blue-700 ' : ''}`}
       onClick={() => onClick(value)}>
       {label}
     </button>
@@ -31,10 +34,13 @@ function Content() {
   const filterDay = useSelector((state) => state.filterDay);
   const sportFilter = useSelector(selectSportFilter);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = currentPage === 1 ? 7 : 8;
   const indexOfLastEvent = currentPage * itemsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - itemsPerPage;
   const [sortByFinish, setSortByFinish] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  // const effectiveItemsPerPage = currentPage === 2 ? (itemsPerPage - 1) : (itemsPerPage);
+
 
 
   useEffect(() => {
@@ -154,6 +160,16 @@ function Content() {
           </div>
         </div>
         <div className="content-event ">
+          {
+            currentPage === 1 && (
+              <div className='add-card-container' onClick={() => setOpenModal(true)}>
+                <div className="add-card px-4 bg-Blue-200 rounded-[10px] shadow border border-Blue-700 justify-center items-center gap-1 inline-flex">
+                  <div className="text-Blue-700 text-6xl">+</div>
+                </div>
+              </div>
+            )
+          }
+          <AddModal showModal={openModal} setShowModal={setOpenModal} />
           {currentEvents.map(event => (
             <TournamentCard key={event.id} event={event} />
           ))}

@@ -67,6 +67,27 @@
 
 }
 
+.add-card-container {
+    margin: 20px;
+    width: 20%;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-card {
+    width: 80%;
+    height: 70%;
+}
+
+
+.add-card:hover {
+    width: 90%;
+    height: 80%;
+}
+
 .card-head {
     margin-left: 5px;
     margin-right: 5px;
@@ -107,5 +128,5 @@
 }
 
 .useFilter {
-    background: linear-gradient(0deg, #B4C7F1 0%, #B4C7F1 100%), rgba(0, 0, 0, 0.00);
+    background: blue;
 }
