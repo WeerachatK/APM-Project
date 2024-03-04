@@ -37,7 +37,7 @@ module.exports = function (connection) {
      *         description: An error occurred with the database operation.
      */
     router.get('/sports', (req, res) => {
-        const query = 'SELECT * FROM `apm-project`.sport;';
+        const query = 'SELECT * FROM `apmdatabase`.sport;';
         connection.query(query, (err, result) => {
             if (err) {
                 console.error('Error fetching sports:', err);
@@ -84,7 +84,7 @@ module.exports = function (connection) {
  */
 router.get('/sports/:id', (req, res) => {
     const sportId = req.params.id;
-    const query = 'SELECT * FROM `apm-project`.sport WHERE id = ?;';
+    const query = 'SELECT * FROM `apmdatabase`.sport WHERE id = ?;';
     connection.query(query, [sportId], (err, result) => {
         if (err) {
             console.error('Error fetching sport:', err);
@@ -134,7 +134,7 @@ router.post('/sports', (req, res) => {
     }
 
     const query = `
-        INSERT INTO \`apm-project\`.sport (type, sub_type, remark)
+        INSERT INTO \`apmdatabase\`.sport (type, sub_type, remark)
         VALUES (?, ?, ?);
     `;
     connection.query(query, [type, sub_type, remark], (err, result) => {
@@ -189,7 +189,7 @@ router.put('/sports/:id', (req, res) => {
     const { type, sub_type, remark } = req.body;
 
     const query = `
-        UPDATE \`apm-project\`.sport
+        UPDATE \`apmdatabase\`.sport
         SET type = ?, sub_type = ?, remark = ?
         WHERE id = ?;
     `;
@@ -230,7 +230,7 @@ router.put('/sports/:id', (req, res) => {
 router.delete('/sports/:id', (req, res) => {
     const sportId = req.params.id;
 
-    const query = 'DELETE FROM \`apm-project\`.sport WHERE id = ?;';
+    const query = 'DELETE FROM \`apmdatabase\`.sport WHERE id = ?;';
     connection.query(query, [sportId], (err, result) => {
         if (err) {
             console.error('SQL Error:', err.message);

@@ -1,0 +1,3 @@
+.grid-cols-athlete {
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr 1fr; /* ตัวอย่าง: กำหนดให้คอลัมน์ ATHLETE (คอลัมน์ที่ 4) มีขนาดใหญ่กว่าคอลัมน์อื่นๆ */
+}

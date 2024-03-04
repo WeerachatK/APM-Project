@@ -1,0 +1,10 @@
+.index-body{
+    display: flex;
+    flex-direction: row;
+}
+.content-container{
+    width: 80%;
+}
+/* Body {
+    background: #D9D9D9;
+} */

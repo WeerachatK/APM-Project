@@ -23,3 +23,24 @@
     overflow: hidden;
     background: linear-gradient(113deg, #E4F4FF 0.92%, #BAE4FF 12.06%, #66BAEA 24.51%, #2B78AF 52.04%, #002880 97.05%);
 }
+
+.ButtonFilter {
+    margin: 0.25rem;
+    display: flex;
+    width: 6rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 0.375rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.ButtonFilter:hover {
+    background-color: #ffffff;
+    color: #002880;
+    
+}

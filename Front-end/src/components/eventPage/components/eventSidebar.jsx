@@ -13,8 +13,6 @@ function EventSidebar() {
   const handleBack = () => {
     navigate(-1);
   };
-
-
   const handleDisplayChange = (newDisplay) => (event) => {
     event.preventDefault();
     dispatch(setEventDisplay(newDisplay));
@@ -45,7 +43,7 @@ function EventSidebar() {
         </div >
         <div v className='map-container'>
           <div className="map-image">
-            <iframe src={event?.event_location}
+            <iframe src={event?.location}
               className='w-full h-full]'></iframe>
           </div>
           <div className='map-text'>

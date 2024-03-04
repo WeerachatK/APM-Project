@@ -11,6 +11,9 @@ const NewAPI = require('./routes/news');
 const AthleteAPI = require('./routes/athlete');
 const CompeteAPI = require('./routes/compete');
 const SportsAPI = require('./routes/sport');
+const Userlogin = require('./routes/userlogin');
+const CalPointField = require('./routes/calPointField');
+const CalPointTrack = require('./routes/calPointTrack');
 
 app.use(cors());
 app.use(express.json());
@@ -31,7 +34,10 @@ connection.connect((err) => {
         NewAPI(connection ),
         CompeteAPI(connection ),
         AthleteAPI(connection ),
-        SportsAPI(connection)
+        SportsAPI(connection),
+        Userlogin(connection),
+        CalPointField(connection),
+        CalPointTrack(connection),
         );
        
     }
@@ -62,6 +68,10 @@ const swaggerOptions = {
             './routes//compete.js',
             './routes/athlete.js',
             './routes/sport.js',
+            './routes/userlogin.js',
+            './routes/calPointField.js',
+            './routes/calPointTrack.js '
+
         ]
 }
 

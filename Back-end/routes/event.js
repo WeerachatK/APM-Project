@@ -4,7 +4,6 @@ const router = express.Router();
 
 // Assuming connection is passed as a parameter to this module
 module.exports = function (connection) {
-
     /**
  * @swagger
  * tags:
@@ -29,14 +28,14 @@ module.exports = function (connection) {
  *                   id:
  *                     type: integer
  *                     description: The event ID.
- *                   event_name:
+ *                   name:
  *                     type: string
  *                     description: The name of the event.
  *       500:
  *         description: An error occurred with the database operation.
  */
     router.get('/events', (req, res) => {
-        const query = `SELECT * FROM \`apm-project\`.EVENTS;`;
+        const query = `SELECT * FROM \`apmdatabase\`.EVENTS;`;
         connection.query(query, (err, result) => {
             if (err) {
                 console.log(err);
@@ -72,7 +71,7 @@ module.exports = function (connection) {
      *                 id:
      *                   type: integer
      *                   description: The event ID.
-     *                 event_name:
+     *                 name:
      *                   type: string
      *                   description: The name of the event.
      *       404:
@@ -82,7 +81,7 @@ module.exports = function (connection) {
      */
     router.get('/events/:id', (req, res) => {
         const eventId = req.params.id;
-        const query = `SELECT * FROM \`apm-project\`.EVENTS WHERE id = ?;`;
+        const query = `SELECT * FROM \`apmdatabase\`.EVENTS WHERE id = ?;`;
         connection.query(query, [eventId], (err, result) => {
             if (err) {
                 console.error('Error fetching event:', err);
@@ -95,7 +94,7 @@ module.exports = function (connection) {
         });
     });
 
-    /**
+/**
  * @swagger
  * /api/events:
  *   post:
@@ -109,72 +108,78 @@ module.exports = function (connection) {
  *           schema:
  *             type: object
  *             required:
- *               - event_date_time
+ *               - name
+ *               - classification
+ *               - date_time
+ *               - gender
+ *               - status
+ *               - sport_id
+ *               - number
  *             properties:
- *               event_name:
+ *               number:
  *                 type: string
- *               event_class:
+ *               name:
  *                 type: string
- *               event_description:
+ *               classification:
  *                 type: string
- *               event_date_time:
+ *               date_time:
  *                 type: string
  *                 format: date-time
- *               event_gender:
+ *               gender:
  *                 type: string
  *               status:
  *                 type: string
- *               event_location:
+ *               location:
  *                 type: string
- *               SPORT_id:
+ *               sport_id:
  *                 type: integer
- *               event_number:
+ *               stage:
  *                 type: string
- *               committee_id:
- *                 type: integer
- *               remark:
- *                 type: string
+ *               bypoint:
+ *                 type: boolean
  *               score_format:
  *                 type: string
- *               icon:
+ *               remark:
  *                 type: string
  *     responses:
  *       201:
  *         description: Event added successfully.
  *       400:
- *         description: event_date_time is required.
+ *         description: Missing required fields.
+ *       404:
+ *         description: Sport not found.
  *       500:
  *         description: Error adding event to the database.
  */
+
     router.post('/events', (req, res) => {
-        // Required fields
-        const requiredFields = ['event_name', 'event_class', 'event_date_time', 'event_gender', 'status', 'SPORT_id', 'event_number'];
+
+        const requiredFields = ['name', 'classification', 'date_time', 'gender', 'status', 'sport_id', 'number'];
         for (let field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).send(`${field} is required`);
             }
         }
-    
+
         const query = `
-            INSERT INTO \`apm-project\`.EVENTS 
-            (event_name, event_class, event_description, event_date_time, event_gender, status, event_location, SPORT_id, event_number, committee_id, remark, score_format, icon) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO \`apmdatabase\`.EVENTS 
+            (number, name, classification, date_time, gender, status, location, sport_id, stage, bypoint, score_format, remark) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `;
     
         connection.query(query, [
-            req.body.event_name,
-            req.body.event_class,
-            req.body.event_description || null, 
-            req.body.event_date_time,
-            req.body.event_gender,
+            req.body.number,
+            req.body.name,
+            req.body.classification,
+            req.body.date_time,
+            req.body.gender,
             req.body.status,
-            req.body.event_location || null,
-            req.body.SPORT_id,
-            req.body.event_number,
-            req.body.committee_id || null,
-            req.body.remark || null,
+            req.body.location || null,
+            req.body.sport_id,
+            req.body.stage || null,
+            req.body.bypoint || null,
             req.body.score_format || null,
-            req.body.icon || null
+            req.body.remark || null
         ], (err, result) => {
             if (err) {
                 console.error('SQL Error:', err.message);
@@ -184,6 +189,7 @@ module.exports = function (connection) {
             }
         });
     });
+    
     
     
 
@@ -208,7 +214,7 @@ module.exports = function (connection) {
  *           schema:
  *             type: object
  *             properties:
- *               event_name:
+ *               name:
  *                 type: string
  *     responses:
  *       200:
@@ -223,11 +229,10 @@ module.exports = function (connection) {
         const updateFields = [];
         const updateValues = [];
     
-        // Including new fields in the possibleFields array
+        // Adjusting field names to match your database structure
         const possibleFields = [
-            'event_name', 'event_class', 'event_description', 'event_date_time',
-            'event_gender', 'status', 'event_location', 'SPORT_id',
-            'event_number', 'committee_id', 'remark', 'score_format','icon'
+            'number', 'name', 'classification', 'date_time', 'gender',
+            'status', 'location', 'sport_id', 'stage', 'bypoint', 'score_format', 'remark'
         ];
     
         possibleFields.forEach(field => {
@@ -244,15 +249,17 @@ module.exports = function (connection) {
         updateValues.push(eventId);
     
         const query = `
-            UPDATE \`apm-project\`.EVENTS 
+            UPDATE \`apmdatabase\`.EVENTS 
             SET ${updateFields.join(', ')}
             WHERE id = ?;
         `;
     
         connection.query(query, updateValues, (err, result) => {
             if (err) {
-                console.error(err);
+                console.error('SQL Error:', err);
                 res.status(500).send('Error updating event.');
+            } else if (result.affectedRows === 0) {
+                res.status(404).send('Event not found.');
             } else {
                 res.status(200).send('Event updated successfully.');
             }
@@ -282,7 +289,7 @@ module.exports = function (connection) {
  */
     router.delete('/events/:id', (req, res) => {
         const eventId = req.params.id;
-        const query = `DELETE FROM \`apm-project\`.EVENTS WHERE id = ?;`;
+        const query = `DELETE FROM \`apmdatabase\`.EVENTS WHERE id = ?;`;
         connection.query(query, [eventId], (err, result) => {
             if (err) {
                 console.log(err);

@@ -6,17 +6,18 @@ import { useLocation } from 'react-router-dom';
 
 function Index() {
     const location = useLocation();
-    const event = location.state?.event;
+    const event = location.state?.selectedEvent;
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         dispatch(setDisplay('event'));
+        console.log('index', event)
     }, [dispatch]);
     return (
         <>
             <div className="index-body">
                 <blank className='w-[20%]'/>
-                <div className='content-container'>
+                <div className='w-[80%]'>
                     <Content event = { event }/>
                 </div>
             </div>

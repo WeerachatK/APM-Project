@@ -2,7 +2,15 @@ import React, { useEffect } from 'react';
 import "./content.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEventById } from '../../../redux/slices/fetchEventByIdSlice';
-import { formatDate, formatTime, calculateAge } from '../../date_time_format';
+import { CountryFlag } from '../../athletePage/countryFlag';
+import { formatDate, formatTime, calculateAge, getGenderDisplay } from '../../date_time_format';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import {
+    DataGrid,
+    GridToolbarQuickFilter,
+    GridActionsCellItem,
+} from '@mui/x-data-grid';
+import Avatar from '@mui/material/Avatar';
 import Profile from '../../../assets/images/male_profile.png';
 
 
@@ -67,11 +75,11 @@ function OrderCard({ orderNumber, athlete, format }) {
                 <p className='w-full'>{orderNumber}</p>
                 <p className='w-full'>{athlete.bib}</p>
                 <p className='w-full'>{athlete.country}</p>
-                <p className='w-full'>{athlete.disability_class}</p>
+                <p className='w-full'>{athlete.classification}</p>
             </div>
             <div className='w-full p-2 flex'>
                 <div className='bg-black rounded-lg h-[100px] w-[120px] flex-shrink-0 overflow-hidden'>
-                    <img className='object-cover w-full h-full' src={athlete.event_gender === 'Women' ? WomanProfile : ManProfile} alt="" />
+                    <img className='object-cover w-full h-full' src={athlete.gender === 'W' ? WomanProfile : ManProfile} alt="" />
                 </div>
                 <div className='flex flex-col justify-center items-start px-5 w-full'>
                     <div className='flex items-center  h-full '>
@@ -86,28 +94,157 @@ function OrderCard({ orderNumber, athlete, format }) {
 }
 
 function Result({ event }) {
-
     const dispatch = useDispatch();
-
     useEffect(() => {
         if (event && event.id) {
             dispatch(fetchEventById(event.id));
         }
     }, [dispatch, event]);
-
-
     const eventByid = useSelector(state => state.fetchEventById.data);
+    const sortedEventByid = eventByid ? [...eventByid].sort((a, b) => a.rank - b.rank) : [];
+    const ManProfile = "https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png";
+    const WomanProfile = "https://www.nicepng.com/png/detail/377-3778780_helper4u-maid-bai-cook-chef-empty-profile-picture.png";
+    const columns = [
+        //     <th scope="col" className="w-[16%] py-3 text-center text-sm  font-medium uppercase tracking-wider">
+        //     <WorkspacePremiumIcon sx={{ color: '#FFD700' }} />Gold
+        // </th>
+        // <th scope="col" className="w-[16%] py-3 text-center text-sm font-medium uppercase tracking-wider">
+        //     <WorkspacePremiumIcon sx={{ color: '#C0C0C0' }} />Silver
+        // </th>
+        // <th scope="col" className="w-[16%] py-3 text-center text-sm font-medium uppercase tracking-wider">
+        //     <WorkspacePremiumIcon sx={{ color: '#CD7F32' }} />Bronze
+        // </th>
+        {
+            field: 'medal', headerName: '', width: 60,
+            headerAlign: 'center',
+            renderCell: (params) => (
+                <div className=" w-full">
+                    {params.value === 1 ? (<><div className=' bg-Blue-600 flex justify-center items-center p-1 rounded-full'><WorkspacePremiumIcon sx={{ color: '#FFD700' }} /></div></>) :
+                        params.value === 2 ? (<><div className=' bg-Blue-600 flex justify-center items-center p-1 rounded-full'><WorkspacePremiumIcon sx={{ color: '#C0C0C0' }} /></div></>) :
+                            params.value === 3 ? (<><div className=' bg-Blue-600 flex justify-center items-center p-1 rounded-full'><WorkspacePremiumIcon sx={{ color: '#CD7F32' }} /></div></>) :
+                                <label> - </label>}
+                </div>
+            ),
+        },
+        {
+            field: 'rank', headerName: 'Rank', width: 60,
+            headerAlign: 'center',
+            renderCell: (params) => (
+                <div className="text-center w-full">
+                    <p>{params.value}</p>
+                </div>
+            ),
+        },
+        {
+            field: 'score', 
+            headerName: 'Score', 
+            width: 100,
+            headerAlign: 'center',
+            renderCell: (params) => {
+              // Assume event.score_format and params.value are accessible and contain the necessary data
+              let maxScore;
+              if (params.value && event.score_format) {
+                const scores = Array.isArray(params.value) ? params.value : [];
+                const validScores = scores.filter(s => s.mark === 1);
+                maxScore = event.score_format === "time" ? params.value.time :
+                  event.score_format === "height" ? params.value.height :
+                    Math.max(...validScores.map(s => s.distance) || [0]);
+              }
+              return (
+                <div className="text-center w-full text-Blue-600 font-semibold">
+                  <p>{maxScore}</p>
+                </div>
+              );
+            },
+          },
+        {
+            field: 'bib', headerName: 'BIB', width: 110,
+            headerAlign: 'center',
+            renderCell: (params) => (
+                <div className="text-center w-full">
+                    <p>{params.value}</p>
+                </div>
+            ),
+        },
+        {
+            field: 'dob', headerName: 'DOB', width: 110,
+            headerAlign: 'center',
+            renderCell: (params) => (
+                <div className="text-center w-full">
+                    <p>{params.value}</p>
+                </div>
+            ),
+        },
+        {
+            field: 'country', headerName: 'Country', flex: 0.6,
+            headerAlign: 'center',
+            renderCell: (params) => (
+                <div className="flex items-center w-full justify-center">
+                    <div className='w-[20%] mr-2'>
+                        <CountryFlag countryCode={params.value} />
+                    </div>
+                    <p>{params.value}</p>
+                </div>
+            ),
+        },
+        {
+            field: 'name', headerName: 'Athlete', flex: 1.5,
+            headerAlign: 'left',
+            renderCell: (params) => (
+                <div className='flex items-center w-full justify-start'>
+                    <div className='w-[13%] '>
+                        <Avatar className='' alt={params.value.first_name} src={params.value.gender === 'W' ? WomanProfile : ManProfile} />
+                    </div>
+                    <p className='ml-2'>{params.value.first_name} {params.value.last_name}</p>
+                    <p className='ml-8'>{getGenderDisplay(params.value.gender)}</p>
+                    <p className='ml-8'>{params.value.classification}</p>
+                </div>
+            ),
+        },
+        // {
+        //     field: 'gender', headerName: 'Gender', width: 100,
+        //     headerAlign: 'center',
+        //     renderCell: (params) => (
+        //         <div className="text-center w-full">
+        //             <p>{params.value}</p>
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     field: 'classification', headerName: 'Classification', width: 100,
+        //     headerAlign: 'center',
+        //     renderCell: (params) => (
+        //         <div className="text-center w-full">
+        //             <p>{params.value}</p>
+        //         </div>
+        //     ),
+        // },
+    ];
+
+    const rows = sortedEventByid.map(athletes => ({
+        id: athletes.id,
+        rank: athletes.rank,
+        medal: athletes.medal,
+        score: athletes.score,
+        point: athletes.point,
+        bib: athletes.bib,
+        dob: `${athletes.date_of_birth?.split('T')[0] ?? '-'}`,
+        country: athletes.country,
+        name: athletes,
+        classification: athletes.classification,
+        gender: `${getGenderDisplay(athletes.gender)}`,
+    }));
     return (
-        <div className='p-8'>
-            <div className='w-[70%] border-b-4 border-[#002880]'>
-                <div className='text-3xl text-[#002880] font-semibold'>{event?.event_description}</div>
+        <div className='px-8 py-4'>
+            <div className='w-[70%] border-b-4 border-[#002880] mb-4'>
+                <div className='text-xl text-[#002880] font-semibold'> <span className='text-3xl'> {event?.name} </span>- {event?.gender === 'M' ? 'Man' : 'Woman'}'s {event?.classification}  {event?.stage}</div>
                 <div className='text-base text-[#002880] font-normal '>
-                    <span>{event?.event_gender}</span> Event -
-                    <span>{" " + formatTime(event?.event_date_time)} </span> -
-                    <span>{" " + formatDate(event?.event_date_time)}</span>
+                    <span>{" " + formatTime(event?.date_time)} </span> -
+                    <span>{" " + formatDate(event?.date_time)}</span>
                 </div>
             </div>
-            <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex justify-between items-center text-lg font-semibold'>
+
+            {/* <div className='mt-6 bg-[#002880] h-12 w-full text-white text-center flex justify-between items-center text-lg font-semibold'>
                 <div className='w-full flex justify-between'>
                     <p className='w-full'>Order</p>
                     <p className='w-full'>BIB</p>
@@ -120,19 +257,29 @@ function Result({ event }) {
                 <div className={`${event.score_format === 'distance' ? 'w-4/5' : 'w-1/2'}`}>
                     Score
                 </div>
-            </div>
+            </div> */}
 
-            {event?.status === "finish" ? (
-                <div>
-                    {eventByid?.map((athlete, index, format) => (
-                        <OrderCard
-                            key={index}
-                            orderNumber={index + 1}
-                            athlete={athlete}
-                            format={event.score_format}
-                        />
-                    ))}
-                </div>
+            {event?.status === "result" ? (
+                <DataGrid
+                     sx={{
+                        '.MuiDataGrid-columnHeaders': {
+                            backgroundColor: '#002880',
+                            color: '#ffffff',
+                            fontWeight: '600',
+                        },
+                        '.MuiDataGrid-menuIcon': {
+                            backgroundColor: '#ffffff', 
+                        },
+                        '.MuiDataGrid-sortIcon': {
+                            color: '#ffffff',
+                        },
+                    }}
+                    rows={rows}
+                    columns={columns}
+                    onCellDoubleClick={(params) => handleClick(params)}
+                    rowHeight={70}
+                    headerHeight={50}
+                />
             ) : (
                 <div className='flex justify-center mt-52 w-full text-gray'>
                     There are no results yet. Because the competition has not yet been completed.

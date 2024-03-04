@@ -11,7 +11,7 @@ function Index() {
 
     return (
         <>
-            <div className="index-body">
+            <div className="index-body bg-white">
                 <blank className='w-[20%]'/>
                 <div className='content-container'>
                     <Content />

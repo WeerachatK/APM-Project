@@ -52,6 +52,7 @@ module.exports = {
     extend: {
       backgroundImage: theme => ({
         'blue-x-gradient': 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 7.21%, rgba(3, 42, 129, 0.52) 46.18%, #002880 96.15%)',
+        'sky-x-gradient': 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 7.21%, rgba(255, 255, 255, 0.9) 64.18%, #2196F3 100%)',
         'green-x-gradient': 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 7.21%, rgba(87, 182, 117, 0.58) 37.37%, rgba(37, 160, 76, 0.88) 71.19%, #10973B 96.15%)',
       }),
       spacing: {

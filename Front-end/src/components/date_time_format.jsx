@@ -30,6 +30,20 @@ export function calculateAge(dateOfBirth) {
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export function getGenderDisplay(gender) {
+  if (gender === "M") {
+    return "Man";
+  } else if (gender === "W") {
+    return "Women";
+  } else if (gender === "X") {
+    return "Mixed";
+  } else {
+    return ""; // สำหรับกรณีที่ gender ไม่ตรงกับเงื่อนไขใด ๆ
+  }
+}
+
+
 // function eventTypeIconMap {
 //     sprintRunning: sprintRunningIcon,
 //     javelinThrowing: javelinThrowingIcon,

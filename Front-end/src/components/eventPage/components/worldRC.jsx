@@ -1,78 +1,51 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// function WorldRC({ event }) {
-//     // useState to hold the fetched data
-//     const [records, setRecords] = useState(null);
-
-//     // useEffect to fetch data on component mount
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             try {
-//                 const response = await axios.get('https://thaiparaathletics.com/thaiparaApp/world/records.php', {
-//                     params: {
-//                         gender: 'M',
-//                         event_type: 'Shot Put',
-//                         class: 'F37'
-//                     }
-//                 });
-//                 setRecords(response.data); // Set the data in state
-//             } catch (error) {
-//                 console.error('Error fetching data:', error);
-//                 // Handle error appropriately in your application
-//             }
-//         };
-
-//         fetchData();
-//     }, []); // Empty dependency array means this runs once when the component mounts
-
-//     // Render the fetched data
-//     return (
-//         <div>
-//             {/* Conditional rendering based on whether records is not null */}
-//             {records ? (
-//                 <div>
-//                     {/* Render your data here */}
-//                     {/* This is a basic example, you might want to format your data appropriately */}
-//                     <pre>{JSON.stringify(records, null, 2)}</pre>
-//                 </div>
-//             ) : (
-//                 <p>Loading...</p> // Display a loading message or spinner while data is being fetched
-//             )}
-//         </div>
-//     );
-// }
-
-// export default WorldRC;
-
-
-
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import worldRecordData from './worldRecord.json';
+import worldMedal from '../../../assets/images/worldMedal.png'
 
-// *event_type, class, และ gender* ทำการ map โดยใช้ตัวแปi record เก็บข้อมูล data และเรียกแสดง record.event_type
+async function fetchCountryNameByNPC(npcCode) {
+    try {
+        // Use the REST Countries API to get data by country code (Alpha-3)
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${npcCode}`);
+
+        if (!response.ok) {
+            throw new Error(`Error fetching country data: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        // Assuming the first result is the correct one, extract the country's full name
+        const countryName = data[0]?.name?.common || 'Unknown Country';
+
+        return countryName;
+    } catch (error) {
+        console.error('Failed to fetch country name:', error);
+        return 'Error fetching country name';
+    }
+}
+
+
 function WorldRC({ event }) {
     const ManProfile = "https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png";
     const WomanProfile = "https://www.nicepng.com/png/detail/377-3778780_helper4u-maid-bai-cook-chef-empty-profile-picture.png";
-    const genderParam = event.event_gender === 'Men' ? 'M' : (event.event_gender === 'Women' ? 'W' : '');
-    const eventNameParam = event.event_name.replace(/ /g, '+');
-    const classParam = event.event_class.split('/')[0];
+    const genderParam = event.gender;
+    const eventNameParam = event.name.trim();
+    const classParam = event.classification.split('/')[0];
+    const [record, setRecord] = useState([]);
+    const [countryName, setCountryName] = useState('');
 
-    const [record, setRecord] = useState(null);
+    // useEffect(() => {
+    //     const url = `/api/thaiparaApp/world/records.php?gender=${encodeURIComponent(genderParam)}&event_type=${encodeURIComponent(eventNameParam)}&class=${encodeURIComponent(classParam)}`;
 
-    useEffect(() => {
-        const url = `/api/thaiparaApp/world/records.php?gender=${encodeURIComponent(genderParam)}&event_type=${encodeURIComponent(eventNameParam)}&class=${encodeURIComponent(classParam)}`;
-
-        axios.get(url)
-            .then(response => {
-                setRecord(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching the events data:', error);
-                console.log(error.response);
-            });
-    }, [event.event_gender, event.event_name, event.event_class]); // Dependencies for useEffect
+    //     axios.get(url)
+    //         .then(response => {
+    //             setRecord(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching the events data:', error);
+    //             console.log(error.response);
+    //         });
+    // }, [event.gender, event.name, event.classification]); // Dependencies for useEffect
 
     // if (!record) {
     //     return (
@@ -81,58 +54,100 @@ function WorldRC({ event }) {
     //         </div>
     //     );
     // }
+    useEffect(() => {
+        const filteredRecords = worldRecordData.filter(record =>
+            record.Gender === genderParam &&
+            record.Event_Type === eventNameParam &&
+            record.Class === classParam
+        );
+        setRecord(filteredRecords);
+    }, [event.gender, event.name, event.classification, worldRecordData]);
+
+    useEffect(() => {
+        if (record.length > 0 && record[0].NPC) {
+            fetchCountryNameByNPC(record[0].NPC)
+                .then(name => setCountryName(name));
+        }
+    }, [record]);
 
 
 
     return (
         <>
+            <div className='mt-2'>
+                <button className='bg-yellow-400 text-white rounded-full flex px-2 my-2'>
+                    World Record
+                </button>
+            </div>
+
+            <div>
+                {record.length > 0 ? (
+                    record.map((record, index) => (
+                        record.Family_Name === "vacant" ? (
+                            <div>No records found.</div>
+                        ) : (
+                            <div key={index} className='Order mt-2 w-full text-center flex justify-between items-center bg-white border-2 border-yellow-400'>
+                                <div className='w-full p-2 flex justify-center items-center'>
+                                    <div className='flex rounded-lg h-[60px] flex-shrink-0 overflow-hidden mx-4 object-cover'>
+                                        <img className=' w-full'
+                                            src={worldMedal}
+                                        />
+                                    </div>
+                                    <div className='flex bg-black rounded-lg h-[60px] w-[60px] flex-shrink-0 overflow-hidden border'>
+                                        <img className='object-cover w-full h-full'
+                                            src={record.Gender === 'W' ? WomanProfile : ManProfile} alt=""
+                                        />
+                                    </div>
+                                    <div className='flex flex-col justify-center items-start px-5'>
+                                        <div className='flex items-center  h-full '>
+                                            <p className='text-xl font-semibold text-left'>{record.Family_Name} {record.Given_Name}</p>
+                                        </div>
+                                        <p className='text-xs text-left mt-auto'>NPC: {countryName}
+                                        </p>
+                                        <p className='text-xs text-left mt-auto'>Birth: {record.Birth}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className='w-full p-2  flex justify-start items-start'>
+                                    <div className='w-full '>
+                                        <div className='flex flex-col justify-center items-center text-Blue-600'>
+                                            <p className='bg-Blue-600 text-xs text-white w-[20%] rounded-full'>Result</p>
+                                            <p className=' text-center text-2xl font-semibold'>{record.Result}</p>
+                                        </div>
+                                    </div>
+                                    <div className='w-full text-xs'>
+                                        <div className='flex justify-start'>
+                                            <p className='text-gray-text mr-1'>Date:</p>
+                                            <i>{record.Date}</i>
+                                        </div>
+                                        <div className='flex justify-start '>
+                                            <p className='text-gray-text mr-1'>City:</p>
+                                            <i>{record.City}</i>
+                                        </div>
+                                        <div className='flex justify-start '>
+                                            <p className='text-gray-text mr-1'>Country:</p>
+                                            <i>{record.Country}</i>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        )))
+                ) : (
+                    <p>No records found.</p>
+
+                )}
+            </div>
+
+
         </>
-        // <>
-        //     <div className='mt-4'>
-        //         <button className='bg-yellow-400 text-white rounded-full flex px-2 my-2'>
-        //             World Record
-        //         </button>
-        //     </div>
-
-        //     <div className='Order mt-2  h-[120px] w-full text-center flex justify-between items-center bg-white border-2 border-Blue-600'>
-        //         <div className='w-full p-2 flex ml-4'>
-        //             <div className='bg-black rounded-lg h-[100px] w-[120px] flex-shrink-0 overflow-hidden'>
-        //                 <img className='object-cover w-full h-full'
-        //                     src={event.event_gender === 'Women' ? WomanProfile : ManProfile} alt=""
-        //                 />
-        //             </div>
-        //             <div className='flex flex-col justify-center items-start px-5 w-full'>
-        //                 <div className='flex items-center  h-full '>
-        //                     <p className='text-xl font-semibold text-left'>fullName</p>
-        //                 </div>
-        //                 <p className='text-lg text-left mt-auto'>Birth:
-        //                     {/* {calculateAge(athlete.date_of_birth)} */}
-        //                 </p>
-        //             </div>
-        //         </div>
-        //         <div className='w-full flex flex-col justify-between text-lg font-semibold'>
-
-        //             <div className='flex flex-col text-sm'>
-        //                 <p className='w-full'>Result</p>
-        //                 {/* <p className='w-full text-2xl '>{record.event_description}</p> */}
-        //             </div>
-        //             <div className='flex text-sm font-light mt-5'>
-        //                 <p className='w-full'>Date</p>
-        //                 <p className='w-full'>City</p>
-        //             </div>
-        //             <p className='w-full'>{event.event_gender}</p>
-        //             <p className='w-full'>{event.event_name}</p>
-        //             <p className='w-full'>{event.event_class}</p>
-        //             <p className='w-full'></p>
-        //         </div>
-
-        //     </div>
-        // </>
     )
 }
 
 export default WorldRC
 
 
- // https://thaiparaathletics.com/thaiparaApp/world/records.php?**gender=M**&**event_type=100**%20m&****class=T38**
- // https://thaiparaathletics.com/thaiparaApp/world/records.php?gender=M&event_type=100+m&class=T34
+// https://thaiparaathletics.com/thaiparaApp/world/records.php?**gender=M**&**event_type=100**%20m&****class=T38**
+// https://thaiparaathletics.com/thaiparaApp/world/records.php?gender=M&event_type=100+m&class=T34

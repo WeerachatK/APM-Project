@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import React from 'react';
 import axios from 'axios';
 
 export const fetchEventById = createAsyncThunk(

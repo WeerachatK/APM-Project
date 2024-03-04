@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import UserDropdown from '../components/userDropDown/index';
 import SideBarMenu from '../components/competitionPage/components/sidebar';
 import EventSideBar from '../components/eventPage/components/eventSidebar'
+import ManagementSideBar from '../components/managementSystem/sidebar';
 import WebLogo from '../assets/images/Web-Logo2.svg'
+import { useAuth } from '../components/login/components/useAuth';
 
 
 
@@ -56,7 +58,7 @@ function Profile({ profileData, onDropdownClick, DropdownOpen }) {
 
 function NoLogin() {
   return (
-    < Link to="/login" className='h-full flex items-center flex-shrink-0'>
+    <Link to="/login" className='h-full flex items-center flex-shrink-0'>
       <div className='rounded-full h-8 w-full bg-[#004CEE] text-[#fff]  items-center justify-center text-center px-6 p-1'>
         Login/ Sign up
       </div>
@@ -66,8 +68,10 @@ function NoLogin() {
 
 function Root() {
   const profile = useSelector(state => state.profile);
+  const role = useSelector(state => state.role);
   const display = useSelector(state => state.display);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const { isAuthenticated, login, logout } = useAuth();
   const handleDropdownClick = () => {
     setIsUserDropdownOpen(!isUserDropdownOpen);
   };
@@ -93,13 +97,25 @@ function Root() {
               Competition
               {(display === 'competition' || display === 'event') && <LineHighlight />}
             </Link>
+            <Link to="/athlete" className={`Athlete MenuBox flex flex-col text-2xl  ${(display === 'athlete') && 'font-bold '}`}>
+              Athlete
+              {(display === 'athlete') && <LineHighlight />}
+            </Link>
+            <Link to="/management" className={`Athlete MenuBox flex flex-col text-2xl  
+            ${(display === 'management') && 'font-bold '} 
+            ${(role !== 'admin') && 'hidden'}
+            `}>
+            Management
+              {(display === 'management') && <LineHighlight />}
+            </Link>
           </div>
         </div>
-        {profile ? <Profile profileData={profile} onDropdownClick={handleDropdownClick} DropdownOpen={isUserDropdownOpen} /> : <NoLogin />}
+        {isAuthenticated? <></>: <NoLogin />}
       </nav>
       {isUserDropdownOpen && <UserDropdown handleClick={handleDropdownClick} />}
       {(display === 'competition') && <SideBarMenu />}
       {(display === 'event') && <EventSideBar />}
+      {(display === 'management') && <ManagementSideBar />}
     </>
   );
 }

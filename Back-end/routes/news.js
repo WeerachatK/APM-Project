@@ -42,7 +42,7 @@ module.exports = function (connection) {
      *         description: An error occurred with the database operation.
      */
     router.get('/news', (req, res) => {
-        const query = 'SELECT * FROM `apm-project`.news;';
+        const query = 'SELECT * FROM `apmdatabase`.news;';
         connection.query(query, (err, result) => {
             if (err) {
                 console.error('Error fetching news:', err);
@@ -95,7 +95,7 @@ module.exports = function (connection) {
      */
     router.get('/news/:id', (req, res) => {
         const newsId = req.params.id;
-        const query = `SELECT * FROM \`apm-project\`.news WHERE id = ?;`;
+        const query = `SELECT * FROM \`apmdatabase\`.news WHERE id = ?;`;
         connection.query(query, [newsId], (err, result) => {
             if (err) {
                 console.error('Error fetching news:', err);
@@ -152,7 +152,7 @@ module.exports = function (connection) {
 
         // คำสั่ง SQL สำหรับเพิ่มข่าวใหม่
         const query = `
-            INSERT INTO \`apm-project\`.news (topic, content_text, picture, remark, date_time)
+            INSERT INTO \`apmdatabase\`.news (topic, content_text, picture, remark, date_time)
             VALUES (?, ?, ?, ?, ?);
         `;
         connection.query(query, [topic, content_text, picture, remark, date_time], (err, result) => {
@@ -225,7 +225,7 @@ module.exports = function (connection) {
         if (date_time) updateFields.push(`date_time = '${date_time}'`);
 
         const query = `
-            UPDATE \`apm-project\`.news
+            UPDATE \`apmdatabase\`.news
             SET ${updateFields.join(', ')}
             WHERE id = ${newsId};
         `;
@@ -267,7 +267,7 @@ module.exports = function (connection) {
     router.delete('/news/:id', (req, res) => {
         const newsId = req.params.id;
 
-        const query = `DELETE FROM \`apm-project\`.news WHERE id = ?;`;
+        const query = `DELETE FROM \`apmdatabase\`.news WHERE id = ?;`;
         connection.query(query, [newsId], (err, result) => {
             if (err) {
                 console.error('SQL Error:', err.message);

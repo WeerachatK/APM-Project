@@ -30,7 +30,7 @@ import {
 
 
 
-const AddEventModal = ({ showModal, setShowModal }) => {
+const AddEventModal2 = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -39,16 +39,16 @@ const AddEventModal = ({ showModal, setShowModal }) => {
 
     const formData = new FormData(event.target);
     const eventData = {
-      event_name: formData.get('event_name'),
-      event_class: formData.get('event_class'),
-      event_date_time: formData.get('event_date_time'),
-      event_gender: formData.get('event_gender'),
+      name: formData.get('name'),
+      class: formData.get('class'),
+      date_time: formData.get('date_time'),
+      gender: formData.get('gender'),
       status: formData.get(false),
-      event_location: formData.get('event_location'),
+      location: formData.get('location'),
       sport_id: parseInt(formData.get('sport_id'), 10),
       committee_id: parseInt(formData.get('committee_id'), 10),
       remark: formData.get('remark'),
-      event_number: formData.get('event_number'),
+      number: formData.get('number'),
       score_format: formData.get('score_format'),
       icon: formData.get('icon')
     };
@@ -153,7 +153,7 @@ const AddEventModal = ({ showModal, setShowModal }) => {
               <div className='w-[65%]  p-2'>
                 <p>Event Name</p>
                 <input className='py-1 px-2 w-full rounded-lg border border-black bg-white'
-                  name='event_name'
+                  name='name'
                   type="text"
                   placeholder="Enter event name"
                   required
@@ -213,7 +213,7 @@ const AddEventModal = ({ showModal, setShowModal }) => {
                 <div className=''>
                   <p>Event Number</p>
                   <input className='py-1 px-2 w-full rounded-lg border border-black bg-white'
-                    name='event_number'
+                    name='number'
                     type="text"
                     placeholder="Enter event number"
                     required
@@ -222,7 +222,7 @@ const AddEventModal = ({ showModal, setShowModal }) => {
                 <div className='mt-4 flex justify-evenly'>
                   <div className='w-[50%]'>
                     <p>Gender</p>
-                    <select name='event_gender' className='py-1 px-2 w-full rounded-lg border border-black bg-white'>
+                    <select name='gender' className='py-1 px-2 w-full rounded-lg border border-black bg-white'>
                       <option value="" selected disabled hidden >- Select gender -</option>
                       <option value="Men">Men</option>
                       <option value="Women">Women</option>
@@ -231,7 +231,7 @@ const AddEventModal = ({ showModal, setShowModal }) => {
                   <div className='w-[40%]'>
                     <p>Classification</p>
                     <input className='py-1 px-2 w-full rounded-lg border border-black bg-white'
-                      name='event_class'
+                      name='class'
                       type="text"
                       placeholder="Enter event classification"
                       required
@@ -267,4 +267,4 @@ const AddEventModal = ({ showModal, setShowModal }) => {
   );
 };
 
-export default AddEventModal;
+export default AddEventModal2;

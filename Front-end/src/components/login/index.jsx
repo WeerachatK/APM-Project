@@ -13,11 +13,12 @@ function Index() {
   }, [dispatch]);
   return (
     <>
-      <Routes>
+    <Login/>
+      {/* <Routes>
         <Route path='/' element={
           <nav><Login/></nav>
         } />
-      </Routes>
+      </Routes> */}
 
     </>
   )

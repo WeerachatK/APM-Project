@@ -46,12 +46,12 @@ function SideBarMenu() {
             All
           </div>
           {sports.map((sport) => (
-              <MenuCard 
-                key={sport.id} 
-                event={events} 
-                handleFilterClick={handleFilterClick} 
-                sport={sport}
-                filter={filter}
+            <MenuCard
+              key={sport.id}
+              event={events}
+              handleFilterClick={handleFilterClick}
+              sport={sport}
+              filter={filter}
             />
           ))}
           {/* แสดง * sports.sub_type */}
@@ -71,7 +71,7 @@ function SideBarMenu() {
           <div className="map-image">
             {/* <img src="https://www.google.com/maps/d/thumbnail?mid=1IiSZmA46ha-bnHijm9cdN-kwVwI&hl=en_US" alt="Description" className="object-cover w-full h-full" /> */}
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1304.9833736696628!2d102.04968662049286!3d14.927479122976726!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311eb2c1fbbc0131%3A0xbcc4725147c5b872!2z4Liq4LiZ4Liy4Lih4LiB4Li14Lis4Liy4LmA4LiJ4Lil4Li04Lih4Lie4Lij4Liw4LmA4LiB4Li14Lii4Lij4LiV4Li0IDgwIOC4nuC4o-C4o-C4qeC4siA1IOC4mOC4seC4meC4p-C4siAyNTUw!5e1!3m2!1sth!2sth!4v1704254380311!5m2!1sth!2sth" 
-            className='w-full h-[20%]'></iframe>
+            className='w-full h-[20%] bg-black'></iframe>
           </div>
           <div className='map-text'>
             <div className='map-location'>80th Birthday Stadium</div>

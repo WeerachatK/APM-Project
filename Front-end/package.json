@@ -7,23 +7,29 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@date-io/dayjs": "^3.0.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.5",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.16",
     "@mui/system": "^5.15.5",
+    "@mui/x-data-grid": "^6.19.4",
+    "@mui/x-data-grid-generator": "^6.19.4",
     "@mui/x-date-pickers": "^6.19.0",
     "@reduxjs/toolkit": "^1.9.5",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
+    "caniuse-lite": "^1.0.30001588",
+    "date-fns": "^3.3.1",
     "dayjs": "^1.11.10",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "gapi": "^0.0.3",
     "gapi-script": "^1.2.0",
+    "jwt-decode": "^4.0.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^17.0.0 || ^18.0.0",
@@ -34,7 +40,9 @@
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "slick-carousel": "^1.8.1"
+    "redux-thunk": "^3.1.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
